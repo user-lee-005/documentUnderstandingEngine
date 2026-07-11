@@ -10,6 +10,14 @@ public record EngineConfig(
     double maxUnderlineDeltaYPts,
     double maxLabelToValueDistancePts,
     double lowConfidenceEscalationThreshold,
+    double columnGutterMinWidthPts,
+    double columnGutterBinWidthPts,
+    double rowGroupingGapTolerancePts,
+    double minSectionBreakGapPts,
+    double sectionBreakGapMultiplier,
+    int repeatedBlockMinRunLength,
+    double headerFooterBandFraction,
+    double headerFooterMinRepeatFraction,
     Map<String, Double> detectorWeights
 ) {
 
@@ -22,6 +30,14 @@ public record EngineConfig(
             1.5,    // maxUnderlineDeltaYPts
             120.0,  // maxLabelToValueDistancePts
             0.6,    // lowConfidenceEscalationThreshold
+            24.0,   // columnGutterMinWidthPts
+            4.0,    // columnGutterBinWidthPts
+            2.0,    // rowGroupingGapTolerancePts
+            10.0,   // minSectionBreakGapPts
+            1.8,    // sectionBreakGapMultiplier
+            3,      // repeatedBlockMinRunLength
+            0.12,   // headerFooterBandFraction
+            0.5,    // headerFooterMinRepeatFraction
             Map.of()
         );
     }

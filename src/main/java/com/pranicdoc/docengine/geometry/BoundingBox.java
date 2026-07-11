@@ -1,5 +1,7 @@
 package com.pranicdoc.docengine.geometry;
 
+import java.util.List;
+
 /**
  * Raw PDF user-space coordinates, bottom-left origin, in PDF points.
  * No Y-flip or pixel conversion happens anywhere in this engine — that is
@@ -59,5 +61,16 @@ public record BoundingBox(double x0, double y0, double x1, double y1) {
         double dx = centerX() - other.centerX();
         double dy = centerY() - other.centerY();
         return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    public static BoundingBox unionOf(List<BoundingBox> boxes) {
+        if (boxes.isEmpty()) {
+            throw new IllegalArgumentException("Cannot union an empty list of bounding boxes");
+        }
+        double x0 = boxes.stream().mapToDouble(BoundingBox::x0).min().orElseThrow();
+        double y0 = boxes.stream().mapToDouble(BoundingBox::y0).min().orElseThrow();
+        double x1 = boxes.stream().mapToDouble(BoundingBox::x1).max().orElseThrow();
+        double y1 = boxes.stream().mapToDouble(BoundingBox::y1).max().orElseThrow();
+        return new BoundingBox(x0, y0, x1, y1);
     }
 }

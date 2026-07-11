@@ -9,12 +9,18 @@ import com.pranicdoc.docengine.detect.DetectionCandidate;
 import com.pranicdoc.docengine.detect.DetectorRegistry;
 import com.pranicdoc.docengine.detect.impl.LabelDetector;
 import com.pranicdoc.docengine.detect.impl.RectangleDetector;
+import com.pranicdoc.docengine.graph.DocumentGraph;
+import com.pranicdoc.docengine.graph.LayoutGraphBuilder;
+import com.pranicdoc.docengine.layout.DefaultLayoutAnalyzer;
+import com.pranicdoc.docengine.layout.DocumentLayout;
 import com.pranicdoc.docengine.layout.LayoutAnalyzer;
 import com.pranicdoc.docengine.layout.LayoutNode;
-import com.pranicdoc.docengine.layout.MinimalLayoutAnalyzer;
+import com.pranicdoc.docengine.layout.PageContent;
 import com.pranicdoc.docengine.output.DocumentResult;
+import com.pranicdoc.docengine.primitives.extractors.ImagePrimitiveExtractor;
 import com.pranicdoc.docengine.primitives.extractors.TextPrimitiveExtractor;
 import com.pranicdoc.docengine.primitives.extractors.VectorPrimitiveExtractor;
+import com.pranicdoc.docengine.primitives.model.ImagePrimitive;
 import com.pranicdoc.docengine.primitives.model.TextLine;
 import com.pranicdoc.docengine.primitives.model.VectorPrimitive;
 import com.pranicdoc.docengine.semantic.SemanticField;
@@ -27,18 +33,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Roadmap Phase 0 wiring: classify -> per-page text/vector primitives -> a single-PAGE
- * layout scope -> RectangleDetector + LabelDetector -> merge -> naive proximity pairing.
- * Stage 3's real layout tree, the full detector set, the DocumentGraph, and the Stage 6
- * rule chain all replace pieces of this incrementally in later phases without changing
- * this class's public contract (run(PDDocument, String) -> DocumentResult).
+ * Roadmap Phase 1 wiring: classify -> full per-page primitive extraction (text, vector,
+ * image) -> DefaultLayoutAnalyzer's real Page->Column->Section->Row tree -> LayoutGraphBuilder's
+ * DocumentGraph -> RectangleDetector + LabelDetector (still reading the page node's flat,
+ * unfiltered textLines/vectorPrimitives attributes, unchanged from Phase 0) -> merge -> naive
+ * proximity pairing. The built DocumentLayout/DocumentGraph are stashed on PipelineContext —
+ * real pipeline artifacts, even though Stage 6 doesn't consume the graph yet (that's Phase 3).
  */
 public class PipelineRunner {
 
     private final DocumentClassifier classifier = new PdfDocumentClassifier();
     private final TextPrimitiveExtractor textExtractor = new TextPrimitiveExtractor();
     private final VectorPrimitiveExtractor vectorExtractor = new VectorPrimitiveExtractor();
-    private final LayoutAnalyzer layoutAnalyzer = new MinimalLayoutAnalyzer();
+    private final ImagePrimitiveExtractor imageExtractor = new ImagePrimitiveExtractor();
+    private final LayoutAnalyzer layoutAnalyzer = new DefaultLayoutAnalyzer();
+    private final LayoutGraphBuilder graphBuilder = new LayoutGraphBuilder();
     private final DetectorRegistry detectorRegistry = new DetectorRegistry(List.of(new RectangleDetector(), new LabelDetector()));
     private final CandidateMerger merger = new CandidateMerger();
     private final SemanticResolver resolver;
@@ -52,12 +61,23 @@ public class PipelineRunner {
         PipelineContext ctx = new PipelineContext(config);
         ctx.setMetadata(classifier.classify(document));
 
-        List<DetectionCandidate> allCandidates = new ArrayList<>();
+        List<PageContent> pages = new ArrayList<>();
         for (int page = 0; page < document.getNumberOfPages(); page++) {
             ctx.setCurrentPage(page);
             List<TextLine> textLines = textExtractor.extract(document, page, ctx);
             List<VectorPrimitive> vectorPrimitives = vectorExtractor.extract(document, page, ctx);
-            LayoutNode pageNode = layoutAnalyzer.analyzePage(page, textLines, vectorPrimitives, ctx);
+            List<ImagePrimitive> images = imageExtractor.extract(document, page, ctx);
+            pages.add(new PageContent(page, ctx.metadata().pages().get(page), textLines, vectorPrimitives, images));
+        }
+
+        DocumentLayout layout = layoutAnalyzer.analyzeDocument(pages, ctx);
+        DocumentGraph graph = graphBuilder.build(layout.pageRoots(), layout.readingOrders());
+        ctx.setDocumentLayout(layout);
+        ctx.setDocumentGraph(graph);
+
+        List<DetectionCandidate> allCandidates = new ArrayList<>();
+        for (LayoutNode pageNode : layout.pageRoots()) {
+            ctx.setCurrentPage(pageNode.page());
             allCandidates.addAll(detectorRegistry.detectAll(pageNode, ctx));
         }
 

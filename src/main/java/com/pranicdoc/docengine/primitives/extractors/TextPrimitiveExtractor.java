@@ -67,7 +67,7 @@ public class TextPrimitiveExtractor implements PrimitiveExtractor<TextLine> {
                 return;
             }
 
-            BoundingBox lineBox = unionOf(words.stream().map(TextWord::box).toList());
+            BoundingBox lineBox = BoundingBox.unionOf(words.stream().map(TextWord::box).toList());
             String lineText = words.stream().map(TextWord::text).collect(Collectors.joining(" "));
             lines.add(new TextLine(lineText, lineBox, pageIndex, List.copyOf(words)));
         }
@@ -76,7 +76,7 @@ public class TextPrimitiveExtractor implements PrimitiveExtractor<TextLine> {
             if (currentWord.isEmpty()) {
                 return;
             }
-            BoundingBox wordBox = unionOf(currentWord.stream().map(TextChar::box).toList());
+            BoundingBox wordBox = BoundingBox.unionOf(currentWord.stream().map(TextChar::box).toList());
             String wordText = currentWord.stream().map(TextChar::value).collect(Collectors.joining());
             words.add(new TextWord(wordText, wordBox, List.copyOf(currentWord)));
             currentWord.clear();
@@ -88,14 +88,6 @@ public class TextPrimitiveExtractor implements PrimitiveExtractor<TextLine> {
             BoundingBox box = BoundingBox.of(tp.getX(), bottomY, tp.getX() + tp.getWidth(), topY);
             String fontName = tp.getFont() != null ? tp.getFont().getName() : "unknown";
             return new TextChar(tp.getUnicode(), box, fontName, tp.getFontSizeInPt());
-        }
-
-        private static BoundingBox unionOf(List<BoundingBox> boxes) {
-            double x0 = boxes.stream().mapToDouble(BoundingBox::x0).min().orElseThrow();
-            double y0 = boxes.stream().mapToDouble(BoundingBox::y0).min().orElseThrow();
-            double x1 = boxes.stream().mapToDouble(BoundingBox::x1).max().orElseThrow();
-            double y1 = boxes.stream().mapToDouble(BoundingBox::y1).max().orElseThrow();
-            return new BoundingBox(x0, y0, x1, y1);
         }
     }
 }
