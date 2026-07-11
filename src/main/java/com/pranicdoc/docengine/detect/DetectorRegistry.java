@@ -22,8 +22,11 @@ public class DetectorRegistry {
     public List<DetectionCandidate> detectAll(LayoutNode scope, PipelineContext ctx) {
         List<DetectionCandidate> all = new ArrayList<>();
         for (FieldCandidateDetector detector : detectors) {
-            if (detector.isApplicable(ctx)) {
-                all.addAll(detector.detect(scope, ctx));
+            if (!detector.isApplicable(ctx)) {
+                continue;
+            }
+            for (DetectionCandidate candidate : detector.detect(scope, ctx)) {
+                all.add(candidate.withScopeNodeId(scope.id()));
             }
         }
         return all;

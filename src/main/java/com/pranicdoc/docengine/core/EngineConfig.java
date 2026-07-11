@@ -38,7 +38,15 @@ public record EngineConfig(
             3,      // repeatedBlockMinRunLength
             0.12,   // headerFooterBandFraction
             0.5,    // headerFooterMinRepeatFraction
-            Map.of()
+            Map.of(
+                // Explicit, drawn geometry is trusted most; inferred/clustered candidates less so.
+                "rectangle-detector", 1.0,
+                "label-detector", 1.0,
+                "underline-detector", 0.9,
+                "table-detector", 0.85,
+                "image-placeholder-detector", 0.8,
+                "whitespace-detector", 0.6
+            )
         );
     }
 

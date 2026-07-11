@@ -1,16 +1,31 @@
 package com.pranicdoc.docengine.detect.impl;
 
 import com.pranicdoc.docengine.core.PipelineContext;
+import com.pranicdoc.docengine.detect.CandidateType;
 import com.pranicdoc.docengine.detect.DetectionCandidate;
 import com.pranicdoc.docengine.detect.FieldCandidateDetector;
+import com.pranicdoc.docengine.geometry.BoundingBox;
 import com.pranicdoc.docengine.layout.LayoutNode;
+import com.pranicdoc.docengine.layout.LayoutNodeType;
+import com.pranicdoc.docengine.primitives.model.TextLine;
+import com.pranicdoc.docengine.primitives.model.VectorPrimitive;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-/** Fine-grained cell/row/column detection within a coarse TableRegionDetector region — lattice/stream heuristics, per Camelot. Roadmap Phase 2. */
+/**
+ * Fine-grained cell detection within the row groups Phase 1's RepeatedBlockDetector already
+ * tagged as repeating (repeatingGroupId) — a Camelot-"stream"-style approach: cluster item
+ * x-centers across those rows into table columns by proximity, rather than requiring ruled
+ * cell borders. Runs against a SECTION scope whose children are ROWs; no-ops everywhere else.
+ */
 public class TableDetector implements FieldCandidateDetector {
 
     public static final String ID = "table-detector";
+    private static final double COLUMN_CLUSTER_GAP_PTS = 8.0;
 
     @Override
     public String detectorId() {
@@ -19,11 +34,76 @@ public class TableDetector implements FieldCandidateDetector {
 
     @Override
     public boolean isApplicable(PipelineContext ctx) {
-        return false;
+        return true;
     }
 
     @Override
     public List<DetectionCandidate> detect(LayoutNode scope, PipelineContext ctx) {
-        throw new UnsupportedOperationException("TableDetector is not implemented yet — see Roadmap Phase 2");
+        List<LayoutNode> rows = scope.children().stream().filter(n -> n.type() == LayoutNodeType.ROW).toList();
+
+        Map<String, List<LayoutNode>> groups = new LinkedHashMap<>();
+        for (LayoutNode row : rows) {
+            String groupId = row.attribute("repeatingGroupId");
+            if (groupId != null) {
+                groups.computeIfAbsent(groupId, k -> new ArrayList<>()).add(row);
+            }
+        }
+
+        List<DetectionCandidate> candidates = new ArrayList<>();
+        for (List<LayoutNode> group : groups.values()) {
+            candidates.addAll(detectTableCells(group));
+        }
+        return candidates;
+    }
+
+    private List<DetectionCandidate> detectTableCells(List<LayoutNode> rows) {
+        List<Item> items = new ArrayList<>();
+        for (int r = 0; r < rows.size(); r++) {
+            LayoutNode row = rows.get(r);
+            for (TextLine line : this.<TextLine>attrOrEmpty(row, "textLines")) {
+                items.add(new Item(line.box(), r, row.page()));
+            }
+            for (VectorPrimitive vp : this.<VectorPrimitive>attrOrEmpty(row, "vectorPrimitives")) {
+                items.add(new Item(vp.box(), r, row.page()));
+            }
+        }
+        if (items.isEmpty()) {
+            return List.of();
+        }
+
+        List<Item> byX = items.stream().sorted(Comparator.comparingDouble(it -> it.box().centerX())).toList();
+        List<List<Item>> columns = new ArrayList<>();
+        List<Item> currentColumn = new ArrayList<>();
+        double lastX = Double.NEGATIVE_INFINITY;
+        for (Item item : byX) {
+            if (!currentColumn.isEmpty() && item.box().centerX() - lastX > COLUMN_CLUSTER_GAP_PTS) {
+                columns.add(currentColumn);
+                currentColumn = new ArrayList<>();
+            }
+            currentColumn.add(item);
+            lastX = item.box().centerX();
+        }
+        columns.add(currentColumn);
+
+        List<DetectionCandidate> candidates = new ArrayList<>();
+        for (int col = 0; col < columns.size(); col++) {
+            List<Item> column = columns.get(col);
+            long distinctRows = column.stream().map(Item::rowIndex).distinct().count();
+            double consistency = (double) distinctRows / rows.size();
+            double confidence = 0.5 + 0.4 * consistency;
+            for (Item item : column) {
+                Map<String, Object> attrs = Map.of("row", item.rowIndex(), "col", col);
+                candidates.add(new DetectionCandidate(ID, item.box(), CandidateType.TABLE, confidence, item.page(), attrs));
+            }
+        }
+        return candidates;
+    }
+
+    private <T> List<T> attrOrEmpty(LayoutNode node, String key) {
+        List<T> value = node.attribute(key);
+        return value == null ? List.of() : value;
+    }
+
+    private record Item(BoundingBox box, int rowIndex, int page) {
     }
 }

@@ -1,13 +1,19 @@
 package com.pranicdoc.docengine.detect.impl;
 
+import com.pranicdoc.docengine.core.EngineConfig;
 import com.pranicdoc.docengine.core.PipelineContext;
+import com.pranicdoc.docengine.detect.CandidateType;
 import com.pranicdoc.docengine.detect.DetectionCandidate;
 import com.pranicdoc.docengine.detect.FieldCandidateDetector;
 import com.pranicdoc.docengine.layout.LayoutNode;
+import com.pranicdoc.docengine.primitives.model.LinePrimitive;
+import com.pranicdoc.docengine.primitives.model.VectorPrimitive;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-/** Generalizes FormBoxDetector's underline heuristic (dy small, dx large) against LinePrimitive. Roadmap Phase 2. */
+/** Generalizes FormBoxDetector's underline heuristic from pdfWorker: dy small, dx large. */
 public class UnderlineDetector implements FieldCandidateDetector {
 
     public static final String ID = "underline-detector";
@@ -19,11 +25,36 @@ public class UnderlineDetector implements FieldCandidateDetector {
 
     @Override
     public boolean isApplicable(PipelineContext ctx) {
-        return false;
+        return true;
     }
 
     @Override
     public List<DetectionCandidate> detect(LayoutNode scope, PipelineContext ctx) {
-        throw new UnsupportedOperationException("UnderlineDetector is not implemented yet — see Roadmap Phase 2");
+        List<VectorPrimitive> primitives = scope.attribute("vectorPrimitives");
+        if (primitives == null) {
+            return List.of();
+        }
+        EngineConfig cfg = ctx.config();
+        List<DetectionCandidate> candidates = new ArrayList<>();
+
+        for (VectorPrimitive vp : primitives) {
+            if (!(vp instanceof LinePrimitive line)) {
+                continue;
+            }
+            double dx = Math.abs(line.x1() - line.x0());
+            double dy = Math.abs(line.y1() - line.y0());
+            if (dy > cfg.maxUnderlineDeltaYPts() || dx < cfg.minUnderlineLengthPts()) {
+                continue;
+            }
+            double confidence = scoreUnderline(dx, dy, cfg);
+            candidates.add(new DetectionCandidate(ID, line.box(), CandidateType.UNDERLINE, confidence, line.page(), Map.of()));
+        }
+        return candidates;
+    }
+
+    private double scoreUnderline(double dx, double dy, EngineConfig cfg) {
+        double lengthBonus = Math.min(0.15, (dx - cfg.minUnderlineLengthPts()) / 200.0);
+        double straightnessPenalty = (dy / Math.max(cfg.maxUnderlineDeltaYPts(), 0.001)) * 0.1;
+        return Math.max(0.5, Math.min(0.95, 0.8 + lengthBonus - straightnessPenalty));
     }
 }

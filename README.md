@@ -7,7 +7,7 @@ fallback for low-confidence cases rather than a dependency of the primary pipeli
 Standalone module — Java 21, its own Gradle build, published independently. Not currently wired
 into `pdfWorker` or any other repo in this workspace; see "Relationship to pdfWorker" below.
 
-## Status: Roadmap Phase 1 (core pipeline skeleton)
+## Status: Roadmap Phase 2 (detector plugin expansion + Stage 4 rewiring)
 
 What actually runs today:
 
@@ -20,19 +20,34 @@ classify (NATIVE/SCANNED/HYBRID)
        - row clustering by Y-proximity, section grouping by outlier gap detection
        - RepeatedBlockDetector: tags consecutive structurally-identical rows
   -> LayoutGraphBuilder: DocumentGraph with PARENT_OF/CHILD_OF/READING_ORDER_NEXT edges (Stage 5, partial)
-  -> RectangleDetector + LabelDetector (still reading the PAGE node's flat, unfiltered
-     textLines/vectorPrimitives attributes — unchanged from Phase 0, Stage 4 rewiring is Phase 2)
+  -> Stage 4, now run against the real tree instead of one flat page-level attribute bag:
+       - leaf nodes (ROW leaves + header/footer bands) get Rectangle/Underline/Label/
+         Whitespace/ImagePlaceholder — each detector no-ops on scopes lacking what it needs
+       - non-leaf SECTION nodes get TableDetector, which clusters item x-centers into columns
+         across the ROW children Phase 1's RepeatedBlockDetector already tagged as repeating
+       - every candidate now carries scopeNodeId (which tree node it came from) for provenance
   -> CandidateMerger (IoU-based non-max suppression)
-  -> NaiveProximityResolver (nearest-neighbor label/value pairing, no rule chain yet)
+  -> NaiveProximityResolver (nearest-neighbor label/value pairing, no rule chain yet;
+     SemanticField.sectionNodeId now threads the value candidate's scopeNodeId through to
+     FieldResult.section — a real structural node id, not yet a semantic section name)
   -> DocumentResult (JSON via DocumentResultSerializer)
 ```
 
-The built `DocumentLayout` (the tree) and `DocumentGraph` are real pipeline artifacts — stashed
-on `PipelineContext` during `PipelineRunner.run()` — even though Stage 6 doesn't consume the
-graph yet (that's Phase 3). Every new component is unit-tested in isolation against its own
-inputs (`ColumnDetectorTest`, `HeaderFooterDetectorTest`, `RepeatedBlockDetectorTest`,
-`LayoutGraphBuilderTest`, `ImagePrimitiveExtractorTest`), not only through the end-to-end
-`Phase0PipelineTest`, which still passes unchanged.
+Every detector in the native-PDF set is real now: `RectangleDetector`, `UnderlineDetector`,
+`LabelDetector`, `WhitespaceDetector`, `ImagePlaceholderDetector` (all row/leaf-scoped),
+`TableDetector` (section-scoped, per-cell candidates with `row`/`col` attributes and
+column-consistency-based confidence). `EngineConfig.defaults()` now assigns each detector a
+default confidence weight — explicit drawn geometry (rectangles, labels) trusted most, inferred
+gaps (whitespace) trusted least. Only the OCR/CV-dependent detectors (`CheckboxDetector`,
+`RadioGroupDetector`, `SignatureDetector`, `HandwritingRegionDetector`, Roadmap Phase 4) and the
+Stage 6 rule chain (Roadmap Phase 3) remain unimplemented.
+
+**`COLUMN` nodes are deliberately excluded from detection** — they only exist so
+`DefaultLayoutAnalyzer`'s row-clustering can read their attributes; scanning them too would
+re-detect every leaf's content a second time under the wrong provenance. `TableRegionDetector`
+(coarse Stage 3 table marking) stays deferred, now for a different reason than in Phase 1:
+`TableDetector`'s cell-level candidates already cover the practical need without a separate
+coarse-region pass — see its class Javadoc if that changes.
 
 Entry point (unchanged):
 
@@ -41,18 +56,15 @@ DocumentResult result = new DocumentEngine().process(new File("form.pdf"));
 String json = new DocumentResultSerializer().toJson(result);
 ```
 
-**Deliberately deferred, even within "Phase 1" scope**: `TableRegionDetector` (coarse table
-regions) — the roadmap only committed column/header/footer/repeated-block detection to Phase 1;
-table detection waits for Phase 2 alongside Stage 4's `TableDetector`. `BLOCK`-level tree nodes
-also don't exist yet — `ROW` is the current leaf level; finer text-run splitting within a row is
-Phase 2+ territory once Stage 4 detectors actually need that granularity.
+Every new/changed component is unit-tested in isolation (`LayoutNodeTest`, `UnderlineDetectorTest`,
+`WhitespaceDetectorTest`, `ImagePlaceholderDetectorTest`, `TableDetectorTest`), and the existing
+end-to-end `Phase0PipelineTest` plus every Phase 1 test still pass unchanged — meaningful proof
+the rewiring correctly reaches real tree scopes, since if leaf/section collection were broken,
+`Phase0PipelineTest` would find zero fields.
 
-Everything else in the package structure (the rest of the Stage 4 detector set —
-underline/checkbox/radio/signature/handwriting/table/whitespace/image-placeholder, the Stage 6
-rule chain, template fingerprinting/learning, the AI fallback gateway, the debug overlay
-renderer, and the OCR/CV/ONNX backends) is still scaffolded as interfaces and data types but
-**not implemented** — those methods throw `UnsupportedOperationException` naming the roadmap
-phase that implements them.
+`BLOCK`-level tree nodes still don't exist — `ROW` remains the leaf level. Nothing in Phase 2's
+detector set needed finer text-run splitting within a row, so it stays deferred until something
+does.
 
 ## Building
 
@@ -87,5 +99,5 @@ concern for whatever eventually consumes `DocumentResult`.
 
 See the full architecture document (pipeline design, interfaces, self-critique, comparison
 against Textract/Document AI/Azure Form Recognizer/LayoutParser/pdfplumber/Camelot/Tabula/
-LayoutLM, and the phase-by-phase build order) for the complete picture. Phases 0-1 are
-implemented here; Phases 2-7 are scaffolded but not built.
+LayoutLM, and the phase-by-phase build order) for the complete picture. Phases 0-2 are
+implemented here; Phases 3-7 are scaffolded but not built.

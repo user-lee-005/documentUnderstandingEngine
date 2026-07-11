@@ -19,7 +19,7 @@ public record FieldResult(
     public static FieldResult from(SemanticField field) {
         return new FieldResult(
             field.name(), field.inferredType(), field.value(), field.box(),
-            field.confidence(), field.page(), null, field.detectorId(), field.relatedFieldIds()
+            field.confidence(), field.page(), field.sectionNodeId(), field.detectorId(), field.relatedFieldIds()
         );
     }
 }

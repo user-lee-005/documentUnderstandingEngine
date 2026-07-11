@@ -65,7 +65,7 @@ public class NaiveProximityResolver implements SemanticResolver {
             String rawLabelText = (String) label.attributes().getOrDefault("text", "field-" + idx);
             fields.add(new SemanticField(
                 "field-" + idx, stripTrailingColon(rawLabelText), "text", null,
-                nearest.box(), nearest.page(), aggregated, nearest.detectorId(), List.of()
+                nearest.box(), nearest.page(), nearest.scopeNodeId(), aggregated, nearest.detectorId(), List.of()
             ));
             idx++;
         }

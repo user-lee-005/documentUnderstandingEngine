@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * One node of the Page -> Column -> Section -> Row -> Block -> Field -> Value tree.
@@ -59,5 +60,25 @@ public final class LayoutNode {
     @SuppressWarnings("unchecked")
     public <T> T attribute(String key) {
         return (T) attributes.get(key);
+    }
+
+    public boolean isLeaf() {
+        return children.isEmpty();
+    }
+
+    /** Self and all descendants matching the predicate, depth-first. */
+    public List<LayoutNode> collect(Predicate<LayoutNode> predicate) {
+        List<LayoutNode> result = new ArrayList<>();
+        collectInto(predicate, result);
+        return result;
+    }
+
+    private void collectInto(Predicate<LayoutNode> predicate, List<LayoutNode> result) {
+        if (predicate.test(this)) {
+            result.add(this);
+        }
+        for (LayoutNode child : children) {
+            child.collectInto(predicate, result);
+        }
     }
 }

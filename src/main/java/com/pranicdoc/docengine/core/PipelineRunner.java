@@ -7,14 +7,19 @@ import com.pranicdoc.docengine.confidence.impl.WeightedAverageConfidenceAggregat
 import com.pranicdoc.docengine.detect.CandidateMerger;
 import com.pranicdoc.docengine.detect.DetectionCandidate;
 import com.pranicdoc.docengine.detect.DetectorRegistry;
+import com.pranicdoc.docengine.detect.impl.ImagePlaceholderDetector;
 import com.pranicdoc.docengine.detect.impl.LabelDetector;
 import com.pranicdoc.docengine.detect.impl.RectangleDetector;
+import com.pranicdoc.docengine.detect.impl.TableDetector;
+import com.pranicdoc.docengine.detect.impl.UnderlineDetector;
+import com.pranicdoc.docengine.detect.impl.WhitespaceDetector;
 import com.pranicdoc.docengine.graph.DocumentGraph;
 import com.pranicdoc.docengine.graph.LayoutGraphBuilder;
 import com.pranicdoc.docengine.layout.DefaultLayoutAnalyzer;
 import com.pranicdoc.docengine.layout.DocumentLayout;
 import com.pranicdoc.docengine.layout.LayoutAnalyzer;
 import com.pranicdoc.docengine.layout.LayoutNode;
+import com.pranicdoc.docengine.layout.LayoutNodeType;
 import com.pranicdoc.docengine.layout.PageContent;
 import com.pranicdoc.docengine.output.DocumentResult;
 import com.pranicdoc.docengine.primitives.extractors.ImagePrimitiveExtractor;
@@ -33,12 +38,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Roadmap Phase 1 wiring: classify -> full per-page primitive extraction (text, vector,
- * image) -> DefaultLayoutAnalyzer's real Page->Column->Section->Row tree -> LayoutGraphBuilder's
- * DocumentGraph -> RectangleDetector + LabelDetector (still reading the page node's flat,
- * unfiltered textLines/vectorPrimitives attributes, unchanged from Phase 0) -> merge -> naive
- * proximity pairing. The built DocumentLayout/DocumentGraph are stashed on PipelineContext —
- * real pipeline artifacts, even though Stage 6 doesn't consume the graph yet (that's Phase 3).
+ * Roadmap Phase 2 wiring: classify -> full per-page primitive extraction -> DefaultLayoutAnalyzer's
+ * real tree -> LayoutGraphBuilder's DocumentGraph -> the full native-PDF detector set, run against
+ * the tree's real scopes (Stage 4 rewiring — no longer against one flat PAGE-level attribute bag):
+ *
+ *   - leaf nodes (ROW leaves + header/footer bands) get Rectangle/Underline/Label/Whitespace/
+ *     ImagePlaceholder — each already no-ops on scopes lacking the attributes it needs
+ *   - non-leaf SECTION nodes (whose children are ROWs) get TableDetector, which reads its own
+ *     ROW children's attributes directly and no-ops with zero ROW children
+ *
+ * COLUMN nodes are deliberately excluded from both passes — their textLines/vectorPrimitives
+ * attributes exist only so DefaultLayoutAnalyzer's row-clustering can read them; scanning COLUMN
+ * nodes too would re-detect every leaf's content a second time under the wrong provenance.
  */
 public class PipelineRunner {
 
@@ -48,7 +59,14 @@ public class PipelineRunner {
     private final ImagePrimitiveExtractor imageExtractor = new ImagePrimitiveExtractor();
     private final LayoutAnalyzer layoutAnalyzer = new DefaultLayoutAnalyzer();
     private final LayoutGraphBuilder graphBuilder = new LayoutGraphBuilder();
-    private final DetectorRegistry detectorRegistry = new DetectorRegistry(List.of(new RectangleDetector(), new LabelDetector()));
+    private final DetectorRegistry detectorRegistry = new DetectorRegistry(List.of(
+        new RectangleDetector(),
+        new UnderlineDetector(),
+        new LabelDetector(),
+        new WhitespaceDetector(),
+        new ImagePlaceholderDetector(),
+        new TableDetector()
+    ));
     private final CandidateMerger merger = new CandidateMerger();
     private final SemanticResolver resolver;
 
@@ -76,14 +94,22 @@ public class PipelineRunner {
         ctx.setDocumentGraph(graph);
 
         List<DetectionCandidate> allCandidates = new ArrayList<>();
-        for (LayoutNode pageNode : layout.pageRoots()) {
-            ctx.setCurrentPage(pageNode.page());
-            allCandidates.addAll(detectorRegistry.detectAll(pageNode, ctx));
+        for (LayoutNode pageRoot : layout.pageRoots()) {
+            ctx.setCurrentPage(pageRoot.page());
+            for (LayoutNode scope : detectionScopes(pageRoot)) {
+                allCandidates.addAll(detectorRegistry.detectAll(scope, ctx));
+            }
         }
 
         List<DetectionCandidate> merged = merger.merge(allCandidates);
         List<SemanticField> fields = resolver.resolve(merged, ctx);
 
         return DocumentResult.of(documentId, document.getNumberOfPages(), fields);
+    }
+
+    private List<LayoutNode> detectionScopes(LayoutNode pageRoot) {
+        List<LayoutNode> scopes = new ArrayList<>(pageRoot.collect(LayoutNode::isLeaf));
+        scopes.addAll(pageRoot.collect(n -> n.type() == LayoutNodeType.SECTION && !n.isLeaf()));
+        return scopes;
     }
 }
