@@ -1,0 +1,101 @@
+package com.pranicdoc.docengine.primitives.extractors;
+
+import com.pranicdoc.docengine.core.PipelineContext;
+import com.pranicdoc.docengine.geometry.BoundingBox;
+import com.pranicdoc.docengine.primitives.model.TextChar;
+import com.pranicdoc.docengine.primitives.model.TextLine;
+import com.pranicdoc.docengine.primitives.model.TextWord;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.pdfbox.text.TextPosition;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Builds the char -> word -> line hierarchy directly from PDFBox glyph positions
+ * (overriding writeString's TextPosition callback), preserving positional fidelity
+ * that a plain getText() call would discard.
+ */
+public class TextPrimitiveExtractor implements PrimitiveExtractor<TextLine> {
+
+    @Override
+    public List<TextLine> extract(PDDocument document, int pageIndex, PipelineContext ctx) throws IOException {
+        double pageHeightPts = document.getPage(pageIndex).getMediaBox().getHeight();
+        LineCapturingStripper stripper = new LineCapturingStripper(pageIndex, pageHeightPts);
+        stripper.setSortByPosition(true);
+        stripper.setStartPage(pageIndex + 1);
+        stripper.setEndPage(pageIndex + 1);
+        stripper.getText(document);
+        return stripper.lines();
+    }
+
+    private static final class LineCapturingStripper extends PDFTextStripper {
+
+        private final int pageIndex;
+        private final double pageHeightPts;
+        private final List<TextLine> lines = new ArrayList<>();
+
+        LineCapturingStripper(int pageIndex, double pageHeightPts) throws IOException {
+            super();
+            this.pageIndex = pageIndex;
+            this.pageHeightPts = pageHeightPts;
+        }
+
+        List<TextLine> lines() {
+            return lines;
+        }
+
+        @Override
+        protected void writeString(String text, List<TextPosition> textPositions) throws IOException {
+            List<TextWord> words = new ArrayList<>();
+            List<TextChar> currentWord = new ArrayList<>();
+
+            for (TextPosition tp : textPositions) {
+                String unicode = tp.getUnicode();
+                if (unicode == null || unicode.isBlank()) {
+                    flushWord(currentWord, words);
+                    continue;
+                }
+                currentWord.add(toTextChar(tp));
+            }
+            flushWord(currentWord, words);
+
+            if (words.isEmpty()) {
+                return;
+            }
+
+            BoundingBox lineBox = unionOf(words.stream().map(TextWord::box).toList());
+            String lineText = words.stream().map(TextWord::text).collect(Collectors.joining(" "));
+            lines.add(new TextLine(lineText, lineBox, pageIndex, List.copyOf(words)));
+        }
+
+        private void flushWord(List<TextChar> currentWord, List<TextWord> words) {
+            if (currentWord.isEmpty()) {
+                return;
+            }
+            BoundingBox wordBox = unionOf(currentWord.stream().map(TextChar::box).toList());
+            String wordText = currentWord.stream().map(TextChar::value).collect(Collectors.joining());
+            words.add(new TextWord(wordText, wordBox, List.copyOf(currentWord)));
+            currentWord.clear();
+        }
+
+        private TextChar toTextChar(TextPosition tp) {
+            double topY = pageHeightPts - tp.getY();
+            double bottomY = topY - tp.getHeight();
+            BoundingBox box = BoundingBox.of(tp.getX(), bottomY, tp.getX() + tp.getWidth(), topY);
+            String fontName = tp.getFont() != null ? tp.getFont().getName() : "unknown";
+            return new TextChar(tp.getUnicode(), box, fontName, tp.getFontSizeInPt());
+        }
+
+        private static BoundingBox unionOf(List<BoundingBox> boxes) {
+            double x0 = boxes.stream().mapToDouble(BoundingBox::x0).min().orElseThrow();
+            double y0 = boxes.stream().mapToDouble(BoundingBox::y0).min().orElseThrow();
+            double x1 = boxes.stream().mapToDouble(BoundingBox::x1).max().orElseThrow();
+            double y1 = boxes.stream().mapToDouble(BoundingBox::y1).max().orElseThrow();
+            return new BoundingBox(x0, y0, x1, y1);
+        }
+    }
+}
