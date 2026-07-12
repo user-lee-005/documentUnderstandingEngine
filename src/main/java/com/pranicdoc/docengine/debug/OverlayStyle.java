@@ -1,8 +1,9 @@
 package com.pranicdoc.docengine.debug;
 
-import java.awt.Color;
-import java.util.Map;
+/** Box color comes from confidence (see ConfidenceColorScale), not detector identity — detectorId is still visible via the caption text. */
+public record OverlayStyle(float strokeWidth, boolean drawCaptions, float renderDpi) {
 
-/** Maps detectorId -> overlay color, kept consistent across a run so the same detector always renders the same color. */
-public record OverlayStyle(Map<String, Color> colorByDetectorId) {
+    public static OverlayStyle defaults() {
+        return new OverlayStyle(1.5f, true, 150f);
+    }
 }

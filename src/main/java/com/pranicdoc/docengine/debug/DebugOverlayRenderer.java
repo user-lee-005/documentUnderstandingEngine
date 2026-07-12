@@ -1,13 +1,17 @@
 package com.pranicdoc.docengine.debug;
 
+import com.pranicdoc.docengine.detect.DetectionCandidate;
 import com.pranicdoc.docengine.output.DocumentResult;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
- * Renders detected boxes/labels/relationships over the original PDF, colored per detector,
- * with confidence shown as opacity or a numeric label. Roadmap Phase 1 (basic), Phase 4
- * (detector colors once detectors exist), Phase 5 (template-match visualization).
+ * Renders every merged detection candidate over the original PDF, colored by confidence
+ * (ConfidenceColorScale), with a caption naming the detector/type/score. Takes the pre-resolution
+ * candidate pool, not just DocumentResult's final fields — that's the whole point of a debug view.
  */
 public interface DebugOverlayRenderer {
-    DebugExport render(PDDocument document, DocumentResult result, OverlayStyle style);
+    DebugExport render(PDDocument document, List<DetectionCandidate> candidates, DocumentResult result, OverlayStyle style) throws IOException;
 }

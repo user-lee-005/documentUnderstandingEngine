@@ -75,7 +75,7 @@ public class PipelineRunner {
         this.resolver = new NaiveProximityResolver(confidenceEngine);
     }
 
-    public DocumentResult run(PDDocument document, String documentId, EngineConfig config) throws IOException {
+    public PipelineRunResult run(PDDocument document, String documentId, EngineConfig config) throws IOException {
         PipelineContext ctx = new PipelineContext(config);
         ctx.setMetadata(classifier.classify(document));
 
@@ -104,7 +104,8 @@ public class PipelineRunner {
         List<DetectionCandidate> merged = merger.merge(allCandidates);
         List<SemanticField> fields = resolver.resolve(merged, ctx);
 
-        return DocumentResult.of(documentId, document.getNumberOfPages(), fields);
+        DocumentResult result = DocumentResult.of(documentId, document.getNumberOfPages(), fields);
+        return new PipelineRunResult(result, merged);
     }
 
     private List<LayoutNode> detectionScopes(LayoutNode pageRoot) {
