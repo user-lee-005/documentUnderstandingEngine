@@ -93,9 +93,11 @@ class GoldDatasetEvalTest {
         assertFalse(targets.isEmpty(), "expected.json produced no ground-truth boxes");
 
         List<DetectionCandidate> candidates;
+        com.pranicdoc.docengine.output.DocumentResult result;
         try (PDDocument doc = Loader.loadPDF(sampleDir.resolve("source.pdf").toFile())) {
             PipelineRunResult run = new PipelineRunner().run(doc, sampleDir.getFileName().toString(), EngineConfig.defaults());
             candidates = run.mergedCandidates();
+            result = run.result();
         }
 
         StringBuilder report = new StringBuilder();
@@ -126,6 +128,8 @@ class GoldDatasetEvalTest {
         report.append('\n').append("misses (page | category | field):\n");
         misses.forEach(t -> report.append(String.format("  p%d | %-6s | %s%n", t.page(), t.category(), t.name())));
 
+        FieldScore fieldScore = scoreFields(sampleDir.resolve("expected.json"), result, report);
+
         Path out = Path.of("build", "reports", "gold-eval");
         Files.createDirectories(out);
         Files.writeString(out.resolve(sampleDir.getFileName() + ".txt"), report.toString());
@@ -137,6 +141,132 @@ class GoldDatasetEvalTest {
                     e.getKey() + " recall " + recall + " fell below baseline floor " + RECALL_FLOOR.get(e.getKey())
                             + " — detection regressed (see build/reports/gold-eval)");
         }
+        assertTrue(fieldScore.fieldRecall() >= FIELD_RECALL_FLOOR,
+                "field recall " + fieldScore.fieldRecall() + " below floor " + FIELD_RECALL_FLOOR);
+        assertTrue(fieldScore.valueAccuracy() >= VALUE_ACCURACY_FLOOR,
+                "value accuracy " + fieldScore.valueAccuracy() + " below floor " + VALUE_ACCURACY_FLOOR);
+    }
+
+    // ---- field-level scoring: right label <-> right box <-> right value ----
+
+    /** Measured 2026-07-12 on cl01: fields matched 98.1%, values 100%. Floors just below. */
+    private static final double FIELD_RECALL_FLOOR = 0.95;
+    private static final double VALUE_ACCURACY_FLOOR = 0.95;
+
+    private record FieldScore(double fieldRecall, double valueAccuracy) {
+    }
+
+    private FieldScore scoreFields(Path expectedJson, com.pranicdoc.docengine.output.DocumentResult result,
+                                   StringBuilder report) throws IOException {
+        JsonNode root = new ObjectMapper().readTree(expectedJson.toFile());
+        List<com.pranicdoc.docengine.output.FieldResult> resolved = result.allFields();
+
+        int goldFields = 0;
+        int matched = 0;
+        int valueChecks = 0;
+        int valueCorrect = 0;
+        List<String> problems = new ArrayList<>();
+
+        for (JsonNode page : root.path("pages")) {
+            int pageNo = page.path("page").asInt();
+            for (JsonNode section : page.path("sections")) {
+                for (JsonNode f : section.path("fields")) {
+                    BoundingBox labelBox = box(f.get("labelBox"));
+                    if (labelBox == null || "table".equals(f.path("type").asText())) {
+                        continue; // tables are scored as GRID; label-less golds can't be matched by label
+                    }
+                    goldFields++;
+                    String goldLabel = f.path("label").asText();
+                    com.pranicdoc.docengine.output.FieldResult match = resolved.stream()
+                            .filter(r -> r.page() == pageNo && r.labelBox() != null && hits(r.labelBox(), labelBox))
+                            .findFirst().orElse(null);
+                    if (match == null) {
+                        problems.add("UNMATCHED p" + pageNo + " " + goldLabel);
+                        continue;
+                    }
+                    matched++;
+
+                    // value scoring: scalar fields with a non-null gold value; checkbox groups by
+                    // whether the selected option's box overlaps the gold value option's box
+                    JsonNode goldValue = f.get("value");
+                    if (goldValue != null && !goldValue.isNull() && f.path("options").isMissingNode()) {
+                        valueChecks++;
+                        if (valueMatches(goldValue.asText(), match.value())) {
+                            valueCorrect++;
+                        } else {
+                            problems.add("VALUE p" + pageNo + " " + goldLabel + ": want "
+                                    + goldValue.asText() + " got " + match.value());
+                        }
+                    } else if (f.has("options") && goldValue != null && !goldValue.isNull()) {
+                        BoundingBox goldOptionBox = null;
+                        for (JsonNode o : f.path("options")) {
+                            if (goldValue.asText().equals(o.path("name").asText())) {
+                                goldOptionBox = box(o.get("box"));
+                            }
+                        }
+                        if (goldOptionBox != null) {
+                            valueChecks++;
+                            BoundingBox finalGoldOptionBox = goldOptionBox;
+                            boolean ok = match.options().stream()
+                                    .anyMatch(o -> o.selected() && (hits(o.box(), finalGoldOptionBox)
+                                            || goldValue.asText().equalsIgnoreCase(o.name())));
+                            if (ok || String.valueOf(true).equals(String.valueOf(match.value())) && "true".equals(goldValue.asText())) {
+                                valueCorrect++;
+                            } else {
+                                problems.add("SELECT p" + pageNo + " " + goldLabel + ": want " + goldValue.asText());
+                            }
+                        }
+                    }
+                    // array items by index
+                    for (JsonNode item : f.path("items")) {
+                        JsonNode iv = item.get("value");
+                        if (iv == null || iv.isNull()) {
+                            continue;
+                        }
+                        valueChecks++;
+                        int idx = item.path("index").asInt();
+                        String got = match.items().stream().filter(i -> i.index() == idx)
+                                .map(com.pranicdoc.docengine.output.FieldResult.ItemResult::value)
+                                .findFirst().orElse(null);
+                        if (valueMatches(iv.asText(), got)) {
+                            valueCorrect++;
+                        } else {
+                            problems.add("ITEM p" + pageNo + " " + goldLabel + "#" + idx + ": want " + iv.asText() + " got " + got);
+                        }
+                    }
+                }
+            }
+        }
+
+        double fieldRecall = goldFields == 0 ? 1.0 : matched / (double) goldFields;
+        double valueAccuracy = valueChecks == 0 ? 1.0 : valueCorrect / (double) valueChecks;
+        report.append(String.format(Locale.ROOT,
+                "%nfield-level: matched %d/%d (%.1f%%), values correct %d/%d (%.1f%%)%n",
+                matched, goldFields, fieldRecall * 100, valueCorrect, valueChecks, valueAccuracy * 100));
+        problems.forEach(p -> report.append("  ").append(p).append('\n'));
+        return new FieldScore(fieldRecall, valueAccuracy);
+    }
+
+    private static boolean valueMatches(String gold, String got) {
+        String g = normalizeValue(gold);
+        String r = normalizeValue(got);
+        if (g.equals(r)) {
+            return true;
+        }
+        // tolerate render truncation ("Test Prot" vs "Test Protocol") in either direction
+        return g.length() >= 4 && r.length() >= 4 && (g.startsWith(r) || r.startsWith(g));
+    }
+
+    private static String normalizeValue(String s) {
+        return s == null ? "" : s.replaceAll("\\s+", " ").trim().toUpperCase(Locale.ROOT);
+    }
+
+    private static BoundingBox box(JsonNode node) {
+        if (node == null || !node.isArray() || node.size() != 4) {
+            return null;
+        }
+        return new BoundingBox(node.get(0).asDouble(), node.get(1).asDouble(),
+                node.get(2).asDouble(), node.get(3).asDouble());
     }
 
     /** Hit = candidate covers ≥50% of the ground-truth box, or IoU ≥ 0.3. */

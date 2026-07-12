@@ -530,10 +530,13 @@ public class FieldAssemblyResolver implements SemanticResolver {
             result.removeAll(e.getValue());
 
             String stem = e.getKey();
-            String arrayName = captions.stream()
-                    .map(c -> (String) c.attributes().get("text"))
-                    .filter(t -> t != null && normalize(t).equals(normalize(stem) + "S"))
-                    .findFirst().orElse(stem);
+            DetectionCandidate groupCaption = captions.stream()
+                    .filter(c -> {
+                        String t = (String) c.attributes().get("text");
+                        return t != null && normalize(t).equals(normalize(stem) + "S");
+                    })
+                    .findFirst().orElse(null);
+            String arrayName = groupCaption != null ? (String) groupCaption.attributes().get("text") : stem;
             SemanticField first = e.getValue().get(0);
             BoundingBox groupBox = BoundingBox.unionOf(items.stream()
                     .map(i -> i.valueBox() != null ? i.valueBox() : i.labelBox()).filter(b -> b != null).toList());
@@ -543,7 +546,8 @@ public class FieldAssemblyResolver implements SemanticResolver {
             result.removeIf(f -> f.items().isEmpty() && f.name() != null && f.page() == page
                     && normalize(f.name()).equals(normalize(arrayName)));
             result.add(new SemanticField(first.id() + "-array", arrayName, "array", null, groupBox,
-                    first.labelBox(), first.page(), first.sectionName(), first.sectionNodeId(),
+                    groupCaption != null ? groupCaption.box() : first.labelBox(),
+                    first.page(), first.sectionName(), first.sectionNodeId(),
                     first.confidence(), first.detectorId(), List.of(), items, List.of()));
         }
         return result;
