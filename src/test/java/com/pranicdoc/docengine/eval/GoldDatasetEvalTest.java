@@ -49,7 +49,7 @@ class GoldDatasetEvalTest {
     private enum Category {
         LABEL(EnumSet.of(CandidateType.LABEL)),
         VALUE(EnumSet.of(CandidateType.RECTANGLE, CandidateType.UNDERLINE, CandidateType.WHITESPACE,
-                CandidateType.IMAGE_PLACEHOLDER, CandidateType.TABLE)),
+                CandidateType.IMAGE_PLACEHOLDER, CandidateType.TABLE, CandidateType.CHECKBOX)),
         OPTION(EnumSet.allOf(CandidateType.class)),   // no checkbox detector yet — any hit counts
         GRID(EnumSet.of(CandidateType.TABLE, CandidateType.IMAGE_PLACEHOLDER, CandidateType.RECTANGLE));
 
@@ -61,17 +61,17 @@ class GoldDatasetEvalTest {
     }
 
     /**
-     * Measured baseline (2026-07-12, after GlyphTextRepairer + fieldset LabelDetector +
-     * baseline-geometry fix + same-type-only NMS: LABEL 100%, VALUE 57.8%, OPTION 86.7%,
-     * GRID 75.0%) minus tolerance. Raise these as Phase 3+ lands. VALUE is the next target:
-     * misses cluster in row-band fields (value written under a caption on a divider line,
-     * no dedicated detector yet).
+     * Measured baseline (2026-07-12, after the detection-recall push: CaptionBandDetector,
+     * native CheckboxDetector, underline write-bands, CTM fix in VectorPrimitiveExtractor,
+     * rule-boundary row folding, aggregate table candidates): 100% in every category on cl01.
+     * Floors sit just below so real regressions fail loudly while allowing minor jitter from
+     * future gold samples.
      */
     private static final Map<Category, Double> RECALL_FLOOR = new EnumMap<>(Map.of(
             Category.LABEL, 0.95,
-            Category.VALUE, 0.55,
-            Category.OPTION, 0.80,
-            Category.GRID, 0.70));
+            Category.VALUE, 0.95,
+            Category.OPTION, 0.95,
+            Category.GRID, 0.95));
 
     private record Target(int page, BoundingBox box, Category category, String name) {
     }

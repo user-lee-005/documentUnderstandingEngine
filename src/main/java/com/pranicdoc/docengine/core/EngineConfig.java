@@ -25,7 +25,7 @@ public record EngineConfig(
         return new EngineConfig(
             40.0,   // minRectangleWidthPts
             8.0,    // minRectangleHeightPts
-            40.0,   // maxRectangleHeightPts
+            110.0,  // maxRectangleHeightPts — multi-line note boxes reach ~100pt; page frames stay excluded
             30.0,   // minUnderlineLengthPts
             1.5,    // maxUnderlineDeltaYPts
             120.0,  // maxLabelToValueDistancePts
@@ -43,8 +43,10 @@ public record EngineConfig(
                 "rectangle-detector", 1.0,
                 "label-detector", 1.0,
                 "underline-detector", 0.9,
+                "checkbox-detector", 0.85,
                 "table-detector", 0.85,
                 "image-placeholder-detector", 0.8,
+                "caption-band-detector", 0.65,
                 "whitespace-detector", 0.6
             )
         );

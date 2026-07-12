@@ -22,7 +22,8 @@ public class ImagePlaceholderDetector implements FieldCandidateDetector {
 
     public static final String ID = "image-placeholder-detector";
     private static final double MIN_ASPECT_RATIO = 0.4;
-    private static final double MAX_ASPECT_RATIO = 2.5;
+    /** Wide-but-tall note boxes (e.g. 372x136pt "HEALING DETAILS") are still empty bordered regions. */
+    private static final double MAX_ASPECT_RATIO = 3.5;
 
     @Override
     public String detectorId() {

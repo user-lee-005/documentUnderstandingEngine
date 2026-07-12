@@ -96,6 +96,13 @@ public class TableDetector implements FieldCandidateDetector {
                 candidates.add(new DetectionCandidate(ID, item.box(), CandidateType.TABLE, confidence, item.page(), attrs));
             }
         }
+
+        // One aggregate candidate spanning the whole repeating group — "this region is a table".
+        // Per-cell candidates locate content; downstream consumers (pairing, template learning,
+        // eval) also need the table as a single region.
+        BoundingBox tableBox = BoundingBox.unionOf(items.stream().map(Item::box).toList());
+        candidates.add(new DetectionCandidate(ID, tableBox, CandidateType.TABLE, 0.75, items.get(0).page(),
+                Map.of("aggregate", true, "rows", rows.size(), "cols", columns.size())));
         return candidates;
     }
 

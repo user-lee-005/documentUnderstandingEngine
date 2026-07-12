@@ -7,6 +7,8 @@ import com.pranicdoc.docengine.confidence.impl.WeightedAverageConfidenceAggregat
 import com.pranicdoc.docengine.detect.CandidateMerger;
 import com.pranicdoc.docengine.detect.DetectionCandidate;
 import com.pranicdoc.docengine.detect.DetectorRegistry;
+import com.pranicdoc.docengine.detect.impl.CaptionBandDetector;
+import com.pranicdoc.docengine.detect.impl.CheckboxDetector;
 import com.pranicdoc.docengine.detect.impl.ImagePlaceholderDetector;
 import com.pranicdoc.docengine.detect.impl.LabelDetector;
 import com.pranicdoc.docengine.detect.impl.RectangleDetector;
@@ -65,7 +67,9 @@ public class PipelineRunner {
         new LabelDetector(),
         new WhitespaceDetector(),
         new ImagePlaceholderDetector(),
-        new TableDetector()
+        new TableDetector(),
+        new CaptionBandDetector(),
+        new CheckboxDetector()
     ));
     private final CandidateMerger merger = new CandidateMerger();
     private final SemanticResolver resolver;

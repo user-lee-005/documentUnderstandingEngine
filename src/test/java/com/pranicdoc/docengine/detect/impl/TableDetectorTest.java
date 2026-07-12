@@ -34,15 +34,20 @@ class TableDetectorTest {
 
         List<DetectionCandidate> candidates = new TableDetector().detect(section, new PipelineContext(EngineConfig.defaults()));
 
-        assertEquals(6, candidates.size());
+        assertEquals(7, candidates.size(), "6 cells + 1 aggregate table region");
         assertTrue(candidates.stream().allMatch(c -> c.type() == CandidateType.TABLE));
 
-        long col0Count = candidates.stream().filter(c -> ((Integer) c.attributes().get("col")) == 0).count();
-        long col1Count = candidates.stream().filter(c -> ((Integer) c.attributes().get("col")) == 1).count();
+        long col0Count = candidates.stream().filter(c -> Integer.valueOf(0).equals(c.attributes().get("col"))).count();
+        long col1Count = candidates.stream().filter(c -> Integer.valueOf(1).equals(c.attributes().get("col"))).count();
         assertEquals(3, col0Count);
         assertEquals(3, col1Count);
 
         assertEquals(0.9, candidates.get(0).rawConfidence(), 0.01);
+
+        DetectionCandidate aggregate = candidates.stream()
+                .filter(c -> Boolean.TRUE.equals(c.attributes().get("aggregate"))).findFirst().orElseThrow();
+        assertEquals(50, aggregate.box().x0(), 0.01);
+        assertEquals(240, aggregate.box().x1(), 0.01, "aggregate spans all cells");
     }
 
     @Test

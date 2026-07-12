@@ -137,9 +137,10 @@ public class VectorPrimitiveExtractor implements PrimitiveExtractor<VectorPrimit
             return new Point2D.Float(moveX, moveY);
         }
 
-        @Override
-        public Point2D.Float transformedPoint(float x, float y) {
-            return new Point2D.Float(x, y);
-        }
+        // transformedPoint() is deliberately NOT overridden: the base implementation applies the
+        // CTM, and every path operator routes its coordinates through it. An identity override
+        // here once stripped the transform from all paths drawn in a translated coordinate
+        // system — every such line collapsed to origin-relative coordinates and was then
+        // NMS-merged into a single bogus candidate.
     }
 }

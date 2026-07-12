@@ -5,6 +5,7 @@ import com.pranicdoc.docengine.core.PipelineContext;
 import com.pranicdoc.docengine.detect.CandidateType;
 import com.pranicdoc.docengine.detect.DetectionCandidate;
 import com.pranicdoc.docengine.detect.FieldCandidateDetector;
+import com.pranicdoc.docengine.geometry.BoundingBox;
 import com.pranicdoc.docengine.layout.LayoutNode;
 import com.pranicdoc.docengine.primitives.model.LinePrimitive;
 import com.pranicdoc.docengine.primitives.model.VectorPrimitive;
@@ -13,10 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/** Generalizes FormBoxDetector's underline heuristic from pdfWorker: dy small, dx large. */
+/**
+ * Generalizes FormBoxDetector's underline heuristic from pdfWorker: dy small, dx large.
+ * The candidate box is the <b>writable band above the line</b> (one handwriting row tall),
+ * not the zero-height line itself — an underline field's value sits on top of the line, and
+ * downstream consumers (pairing, placement, eval) need that area, not a degenerate box.
+ */
 public class UnderlineDetector implements FieldCandidateDetector {
 
     public static final String ID = "underline-detector";
+    /** Height of the write-on-line area claimed above the detected line. */
+    private static final double WRITE_BAND_HEIGHT_PTS = 12.0;
 
     @Override
     public String detectorId() {
@@ -47,7 +55,11 @@ public class UnderlineDetector implements FieldCandidateDetector {
                 continue;
             }
             double confidence = scoreUnderline(dx, dy, cfg);
-            candidates.add(new DetectionCandidate(ID, line.box(), CandidateType.UNDERLINE, confidence, line.page(), Map.of()));
+            double lineTop = Math.max(line.y0(), line.y1());
+            BoundingBox writeBand = BoundingBox.of(
+                Math.min(line.x0(), line.x1()), lineTop,
+                Math.max(line.x0(), line.x1()), lineTop + WRITE_BAND_HEIGHT_PTS);
+            candidates.add(new DetectionCandidate(ID, writeBand, CandidateType.UNDERLINE, confidence, line.page(), Map.of()));
         }
         return candidates;
     }

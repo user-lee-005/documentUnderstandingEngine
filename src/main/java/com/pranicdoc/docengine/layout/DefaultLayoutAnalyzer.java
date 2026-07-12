@@ -96,6 +96,14 @@ public class DefaultLayoutAnalyzer implements LayoutAnalyzer {
         return band;
     }
 
+    /**
+     * Items taller than this do not participate in row <i>formation</i> — a 700pt table rule or
+     * a rotated section label would otherwise chain every text row it crosses into one giant
+     * row. They are re-attached to every row they vertically overlap after clustering, so
+     * detectors still see them.
+     */
+    private static final double MAX_ROW_FORMING_ITEM_HEIGHT_PTS = 30.0;
+
     /** Clusters a column's content into horizontal bands by Y-proximity — content drawn side by side lands in the same row. */
     private List<LayoutNode> buildRows(LayoutNode column, EngineConfig cfg) {
         List<TextLine> lines = column.attribute("textLines");
@@ -103,13 +111,24 @@ public class DefaultLayoutAnalyzer implements LayoutAnalyzer {
         lines = lines == null ? List.of() : lines;
         vectors = vectors == null ? List.of() : vectors;
 
-        List<PositionedItem> items = new ArrayList<>();
+        List<PositionedItem> all = new ArrayList<>();
         for (TextLine l : lines) {
-            items.add(new PositionedItem(l.box(), l));
+            all.add(new PositionedItem(l.box(), l));
         }
         for (VectorPrimitive v : vectors) {
-            items.add(new PositionedItem(v.box(), v));
+            all.add(new PositionedItem(v.box(), v));
         }
+
+        List<PositionedItem> items = new ArrayList<>();
+        List<PositionedItem> spanning = new ArrayList<>();
+        for (PositionedItem item : all) {
+            (item.box().height() <= MAX_ROW_FORMING_ITEM_HEIGHT_PTS ? items : spanning).add(item);
+        }
+        if (items.isEmpty()) {
+            items = spanning; // page is nothing but tall content — fall back to clustering it directly
+            spanning = List.of();
+        }
+        items = new ArrayList<>(items);
         items.sort((a, b) -> Double.compare(b.box().y1(), a.box().y1()));
 
         List<List<PositionedItem>> rowGroups = new ArrayList<>();
@@ -134,12 +153,34 @@ public class DefaultLayoutAnalyzer implements LayoutAnalyzer {
             rowGroups.add(current);
         }
 
+        // A cluster that is nothing but thin horizontal rules is a row BOUNDARY, not a row —
+        // fold it into the row above. Without this, ruled tables alternate content-row /
+        // rule-row and RepeatedBlockDetector can never see 3 consecutive identical rows.
+        List<List<PositionedItem>> withBoundariesFolded = new ArrayList<>();
+        for (List<PositionedItem> group : rowGroups) {
+            boolean ruleOnly = group.stream().allMatch(
+                it -> it.payload() instanceof VectorPrimitive && it.box().height() <= 2.0);
+            if (ruleOnly && !withBoundariesFolded.isEmpty()) {
+                withBoundariesFolded.get(withBoundariesFolded.size() - 1).addAll(group);
+            } else {
+                withBoundariesFolded.add(group);
+            }
+        }
+        rowGroups = withBoundariesFolded;
+
         List<LayoutNode> rows = new ArrayList<>();
         int idx = 0;
         for (List<PositionedItem> group : rowGroups) {
-            List<TextLine> rowLines = group.stream().map(PositionedItem::payload).filter(p -> p instanceof TextLine).map(p -> (TextLine) p).toList();
-            List<VectorPrimitive> rowVectors = group.stream().map(PositionedItem::payload).filter(p -> p instanceof VectorPrimitive).map(p -> (VectorPrimitive) p).toList();
             BoundingBox rowBox = BoundingBox.unionOf(group.stream().map(PositionedItem::box).toList());
+            // spanning items (tall rules, containers, rotated labels) rejoin every row they overlap
+            List<PositionedItem> members = new ArrayList<>(group);
+            for (PositionedItem tall : spanning) {
+                if (tall.box().y0() <= rowBox.y1() && tall.box().y1() >= rowBox.y0()) {
+                    members.add(tall);
+                }
+            }
+            List<TextLine> rowLines = members.stream().map(PositionedItem::payload).filter(p -> p instanceof TextLine).map(p -> (TextLine) p).toList();
+            List<VectorPrimitive> rowVectors = members.stream().map(PositionedItem::payload).filter(p -> p instanceof VectorPrimitive).map(p -> (VectorPrimitive) p).toList();
             LayoutNode row = new LayoutNode(column.id() + "-row-" + idx, LayoutNodeType.ROW, rowBox, column.page());
             row.putAttribute("textLines", rowLines);
             row.putAttribute("vectorPrimitives", rowVectors);

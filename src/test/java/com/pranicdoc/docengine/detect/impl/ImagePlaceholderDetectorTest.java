@@ -20,8 +20,9 @@ class ImagePlaceholderDetectorTest {
 
     @Test
     void flagsALargeSquareEmptyRectangleAsAPhotoSlot() {
-        RectanglePrimitive photoBox = new RectanglePrimitive(new BoundingBox(50, 600, 150, 700), 0, false, 1.0);
-        LayoutNode scope = new LayoutNode("row-0", LayoutNodeType.ROW, new BoundingBox(50, 600, 150, 700), 0);
+        // must sit above maxRectangleHeightPts (110) — anything shorter is RectangleDetector territory
+        RectanglePrimitive photoBox = new RectanglePrimitive(new BoundingBox(50, 560, 180, 700), 0, false, 1.0);
+        LayoutNode scope = new LayoutNode("row-0", LayoutNodeType.ROW, new BoundingBox(50, 560, 180, 700), 0);
         scope.putAttribute("vectorPrimitives", List.<VectorPrimitive>of(photoBox));
 
         List<DetectionCandidate> candidates = new ImagePlaceholderDetector().detect(scope, new PipelineContext(EngineConfig.defaults()));
