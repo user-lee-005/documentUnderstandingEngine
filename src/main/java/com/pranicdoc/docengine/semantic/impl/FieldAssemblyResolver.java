@@ -99,7 +99,11 @@ public class FieldAssemblyResolver implements SemanticResolver {
         List<DetectionCandidate> tables = new ArrayList<>();
         for (DetectionCandidate c : candidates) {
             switch (c.type()) {
-                case RECTANGLE, IMAGE_PLACEHOLDER -> containers.add(c);
+                case RECTANGLE, IMAGE_PLACEHOLDER -> {
+                    if (!Boolean.TRUE.equals(c.attributes().get("filled"))) {
+                        containers.add(c); // filled rects are banners/shading, not writable areas
+                    }
+                }
                 case CHECKBOX -> checkboxes.add(c);
                 case UNDERLINE -> underlines.add(c);
                 case WHITESPACE -> {
@@ -215,6 +219,27 @@ public class FieldAssemblyResolver implements SemanticResolver {
             }
         }
 
+        // 5b. still-unclaimed colon captions ("Client's Name:") own the writing band to their
+        //     RIGHT — Word-style forms leave that space blank, so no primitive candidate exists
+        for (DetectionCandidate caption : captions) {
+            if (claimedCaptions.contains(caption)
+                    || !String.valueOf(caption.attributes().get("text")).endsWith(":")) {
+                continue;
+            }
+            double right = captions.stream()
+                    .filter(o -> o != caption && o.box().x0() > caption.box().x1())
+                    .filter(o -> Math.min(o.box().y1(), caption.box().y1()) - Math.max(o.box().y0(), caption.box().y0())
+                            > caption.box().height() * 0.5)
+                    .mapToDouble(o -> o.box().x0() - 4)
+                    .min().orElse(Math.min(caption.box().x1() + 280, pageBox(page, ctx).x1() - 30));
+            if (right - caption.box().x1() < 20) {
+                continue;
+            }
+            claimedCaptions.add(caption);
+            drafts.add(Draft.labelled(caption, null,
+                    BoundingBox.of(caption.box().x1() + 3, caption.box().y0() - 2, right, caption.box().y1() + 3)));
+        }
+
         // 5b. tables
         for (DetectionCandidate table : tables) {
             drafts.add(Draft.table(table));
@@ -260,13 +285,22 @@ public class FieldAssemblyResolver implements SemanticResolver {
                 continue;
             }
             // nearest caption above this individual box — GENDER's circles go to GENDER even
-            // when MARITAL STATUS's boxes sit 15pt away in the same band
+            // when MARITAL STATUS's boxes sit 15pt away in the same band — or a colon caption
+            // to the LEFT on the same line ("Type of Healing:  [] Simple  [] Complex")
             DetectionCandidate caption = captions.stream()
                     .filter(l -> l.box().y0() >= box.box().y1() - 2
                             && l.box().y0() - box.box().y1() <= CHECKBOX_CAPTION_MAX_GAP_PTS)
                     .min(Comparator.comparingDouble(l -> horizontalDistance(l.box(), box.box().centerX())))
                     .filter(l -> horizontalDistance(l.box(), box.box().centerX()) < 60)
                     .orElse(null);
+            if (caption == null) {
+                caption = captions.stream()
+                        .filter(l -> String.valueOf(l.attributes().get("text")).endsWith(":"))
+                        .filter(l -> l.box().y0() < box.box().y1() && l.box().y1() > box.box().y0())
+                        .filter(l -> l.box().x1() <= box.box().x0() && box.box().x0() - l.box().x1() < 250)
+                        .min(Comparator.comparingDouble(l -> box.box().x0() - l.box().x1()))
+                        .orElse(null);
+            }
             if (caption != null) {
                 byCaption.computeIfAbsent(caption, k -> new ArrayList<>()).add(box);
             } else {
@@ -554,6 +588,17 @@ public class FieldAssemblyResolver implements SemanticResolver {
     }
 
     // ---------------------------------------------------------------- helpers
+
+    private BoundingBox pageBox(int page, PipelineContext ctx) {
+        if (ctx.documentLayout() != null) {
+            for (LayoutNode root : ctx.documentLayout().pageRoots()) {
+                if (root.page() == page && root.box() != null) {
+                    return root.box();
+                }
+            }
+        }
+        return BoundingBox.of(0, 0, 612, 792);
+    }
 
     private List<TextLine> pageTextLines(int page, PipelineContext ctx) {
         if (ctx.documentLayout() == null) {

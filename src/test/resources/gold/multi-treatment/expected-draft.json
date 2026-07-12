@@ -1,0 +1,3548 @@
+{
+  "_draft": "ENGINE OUTPUT, UNREVIEWED — verify against review-page-N.png, correct, then rename to expected.json",
+  "formType": "multi-treatment",
+  "pageCount": 16,
+  "coordinateSystem": "PDF points, bottom-left origin, per page; box = [x0, y0, x1, y1]",
+  "pages": [
+    {
+      "page": 0,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                731.2,
+                91.8,
+                736.9
+              ],
+              "valueBox": [
+                94.8,
+                729.2,
+                371.8,
+                739.9
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                712.5,
+                86.4,
+                718.2
+              ],
+              "valueBox": [
+                89.4,
+                710.5,
+                366.4,
+                721.2
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                693.7,
+                95.6,
+                699.4
+              ],
+              "valueBox": [
+                98.6,
+                691.7,
+                375.6,
+                702.4
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                676.5,
+                99.0,
+                682.2
+              ],
+              "valueBox": [
+                102.0,
+                674.5,
+                379.0,
+                685.2
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                659.2,
+                122.7,
+                664.9
+              ],
+              "valueBox": [
+                125.7,
+                657.2,
+                402.7,
+                667.9
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                642.0,
+                71.4,
+                647.7
+              ],
+              "valueBox": [
+                74.4,
+                640.0,
+                351.4,
+                650.7
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                601.9,
+                173.8,
+                608.2
+              ],
+              "valueBox": [
+                176.8,
+                599.9,
+                453.8,
+                611.2
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                569.1,
+                332.7,
+                573.8
+              ],
+              "valueBox": [
+                335.7,
+                567.1,
+                566.0,
+                576.8
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                576.5,
+                172.4,
+                579.9
+              ],
+              "valueBox": [
+                160.0,
+                557.5,
+                566.0,
+                574.5
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                568.5,
+                142.1,
+                571.9
+              ],
+              "valueBox": [
+                119.5,
+                549.5,
+                186.0,
+                566.5
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                568.5,
+                212.6,
+                571.9
+              ],
+              "valueBox": [
+                190.0,
+                549.5,
+                233.3,
+                566.5
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                568.5,
+                258.7,
+                571.9
+              ],
+              "valueBox": [
+                237.3,
+                549.5,
+                566.0,
+                566.5
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                331.2,
+                108.3,
+                337.0
+              ],
+              "valueBox": [
+                111.3,
+                329.2,
+                388.3,
+                340.0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 1,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 7,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 8,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 9,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 10,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 11,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 12,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 13,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 14,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                709.8,
+                91.8,
+                715.5
+              ],
+              "valueBox": [
+                94.8,
+                707.8,
+                371.8,
+                718.5
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                27.3,
+                691.0,
+                86.4,
+                696.8
+              ],
+              "valueBox": [
+                89.4,
+                689.0,
+                366.4,
+                699.8
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                672.3,
+                95.6,
+                678.0
+              ],
+              "valueBox": [
+                98.6,
+                670.3,
+                375.6,
+                681.0
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "text",
+              "value": "☐Simple ☐Complex ☐Psychotherapy",
+              "labelBox": [
+                27.3,
+                655.0,
+                99.0,
+                660.8
+              ],
+              "valueBox": [
+                102.0,
+                653.0,
+                379.0,
+                663.8
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                637.8,
+                122.7,
+                643.5
+              ],
+              "valueBox": [
+                125.7,
+                635.8,
+                402.7,
+                646.5
+              ]
+            },
+            {
+              "label": "Session #",
+              "type": "text",
+              "value": "☐ In-Person ☐ Distant",
+              "labelBox": [
+                27.3,
+                620.5,
+                71.4,
+                626.3
+              ],
+              "valueBox": [
+                74.4,
+                618.5,
+                351.4,
+                629.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                580.5,
+                173.8,
+                586.8
+              ],
+              "valueBox": [
+                176.8,
+                578.5,
+                453.8,
+                589.8
+              ]
+            },
+            {
+              "label": "Healer’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                277.0,
+                547.7,
+                332.7,
+                552.4
+              ],
+              "valueBox": [
+                335.7,
+                545.7,
+                566.0,
+                555.4
+              ]
+            },
+            {
+              "label": "(C/D",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                160.0,
+                555.0,
+                172.4,
+                558.4
+              ],
+              "valueBox": [
+                160.0,
+                536.0,
+                566.0,
+                553.0
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                119.5,
+                547.1,
+                142.1,
+                550.5
+              ],
+              "valueBox": [
+                119.5,
+                528.1,
+                186.0,
+                545.1
+              ]
+            },
+            {
+              "label": "(O/U/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                190.0,
+                547.1,
+                212.6,
+                550.5
+              ],
+              "valueBox": [
+                190.0,
+                528.1,
+                233.3,
+                545.1
+              ]
+            },
+            {
+              "label": "(C/D/N)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                237.3,
+                547.1,
+                258.7,
+                550.5
+              ],
+              "valueBox": [
+                237.3,
+                528.1,
+                566.0,
+                545.1
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                27.3,
+                309.8,
+                108.3,
+                315.6
+              ],
+              "valueBox": [
+                111.3,
+                307.8,
+                388.3,
+                318.6
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

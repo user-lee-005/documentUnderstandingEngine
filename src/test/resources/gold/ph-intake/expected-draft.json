@@ -1,0 +1,271 @@
+{
+  "_draft": "ENGINE OUTPUT, UNREVIEWED — verify against review-page-N.png, correct, then rename to expected.json",
+  "formType": "ph-intake",
+  "pageCount": 1,
+  "coordinateSystem": "PDF points, bottom-left origin, per page; box = [x0, y0, x1, y1]",
+  "pages": [
+    {
+      "page": 0,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Today’s Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                36.0,
+                685.7,
+                89.7,
+                690.9
+              ],
+              "valueBox": [
+                92.7,
+                683.7,
+                369.7,
+                693.9
+              ]
+            },
+            {
+              "label": "Client Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                672.9,
+                88.5,
+                678.1
+              ],
+              "valueBox": [
+                91.5,
+                670.9,
+                302.0,
+                681.1
+              ]
+            },
+            {
+              "label": "Age",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                306.0,
+                672.9,
+                324.1,
+                678.1
+              ],
+              "valueBox": [
+                327.1,
+                670.9,
+                582.0,
+                681.1
+              ]
+            },
+            {
+              "label": "Phone Number",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                660.2,
+                100.2,
+                665.4
+              ],
+              "valueBox": [
+                103.2,
+                658.2,
+                302.0,
+                668.4
+              ]
+            },
+            {
+              "label": "City & State",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                306.0,
+                660.2,
+                356.2,
+                665.4
+              ],
+              "valueBox": [
+                359.2,
+                658.2,
+                582.0,
+                668.4
+              ]
+            },
+            {
+              "label": "Email Address",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                647.4,
+                95.6,
+                652.6
+              ],
+              "valueBox": [
+                98.6,
+                645.4,
+                302.0,
+                655.6
+              ]
+            },
+            {
+              "label": "Occupation",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                306.0,
+                647.4,
+                355.1,
+                652.6
+              ],
+              "valueBox": [
+                358.1,
+                645.4,
+                582.0,
+                655.6
+              ]
+            }
+          ]
+        },
+        {
+          "name": "LIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Other Relevant Information",
+              "type": "text",
+              "value": "​ ​",
+              "labelBox": [
+                36.0,
+                560.1,
+                153.2,
+                565.3
+              ],
+              "valueBox": [
+                156.2,
+                558.1,
+                433.2,
+                568.3
+              ]
+            },
+            {
+              "label": "If Yes, Please Explain",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                523.7,
+                121.7,
+                528.9
+              ],
+              "valueBox": [
+                124.7,
+                521.7,
+                401.7,
+                531.9
+              ]
+            }
+          ]
+        },
+        {
+          "name": "☐ YES ☐ NO",
+          "fields": [
+            {
+              "label": "If Yes, Please Explain",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                487.6,
+                121.7,
+                492.9
+              ],
+              "valueBox": [
+                124.7,
+                485.6,
+                401.7,
+                495.9
+              ]
+            },
+            {
+              "label": "Cancer",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                47.3,
+                288.8,
+                78.3,
+                294.0
+              ],
+              "valueBox": [
+                81.3,
+                286.8,
+                358.3,
+                297.0
+              ]
+            },
+            {
+              "label": "If Yes, Type/Location",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                69.9,
+                275.3,
+                155.7,
+                280.5
+              ],
+              "valueBox": [
+                158.7,
+                273.3,
+                435.7,
+                283.5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "MEDICATION AND SUPPLEMENTS",
+          "fields": [
+            {
+              "label": "If Yes Type/Frequency",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                196.5,
+                355.6,
+                287.7,
+                360.8
+              ],
+              "valueBox": [
+                290.7,
+                353.6,
+                567.7,
+                363.8
+              ]
+            },
+            {
+              "label": "Hypertension",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                45.0,
+                342.8,
+                103.6,
+                348.0
+              ],
+              "valueBox": [
+                106.6,
+                340.8,
+                383.6,
+                351.0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

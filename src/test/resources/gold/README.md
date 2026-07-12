@@ -48,6 +48,14 @@ A field with a unique caption and a single container is static. This is what Sta
 `RepeatedBlockDetector`/`TableDetector` already tag and what the Phase 3 rule chain must
 turn into `array`/`table` fields in the final schema.
 
+## Draft samples (`expected-draft.json`)
+
+Samples with an `expected-draft.json` instead of `expected.json` are **unreviewed pseudo-gold**:
+the engine's own resolved output reshaped into the gold schema (`tools/draft_from_resolved.py`).
+The eval harness deliberately ignores them. To promote one: review `review-page-N.png`
+(blue=label, green=value area, orange=checkbox), correct labels/boxes/values in the JSON,
+delete the `_draft` key, and rename the file to `expected.json`.
+
 ## How this ground truth was made (repeat for each new sample)
 
 1. Drop the PDF in as `gold/<id>/source.pdf`
