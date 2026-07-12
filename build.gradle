@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'application'
     id 'maven-publish'
 }
 
@@ -10,6 +11,10 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+}
+
+application {
+    mainClass = 'com.pranicdoc.docengine.cli.DocumentEngineCli'
 }
 
 repositories {
