@@ -7,25 +7,35 @@ import com.pranicdoc.docengine.detect.FieldCandidateDetector;
 import com.pranicdoc.docengine.geometry.BoundingBox;
 import com.pranicdoc.docengine.layout.LayoutNode;
 import com.pranicdoc.docengine.primitives.model.RectanglePrimitive;
+import com.pranicdoc.docengine.primitives.model.TextChar;
+import com.pranicdoc.docengine.primitives.model.TextLine;
+import com.pranicdoc.docengine.primitives.model.TextWord;
 import com.pranicdoc.docengine.primitives.model.VectorPrimitive;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
- * Native-PDF checkbox/option-box detection from vector primitives — no OpenCV required.
+ * Native-PDF checkbox/option-box detection — no OpenCV required. Two sources:
  *
- * <p>Option boxes arrive from the content stream in pieces: a circle is 4 Bezier segments, a
- * rounded rect is 4 corner arcs + 4 edge lines, a plain square may be a single small
- * RectanglePrimitive. This detector clusters small primitives by proximity and flags any
- * cluster whose union box is checkbox-sized. A tick mark drawn inside the box simply joins
- * the cluster without changing its extent.
+ * <p><b>Vector shapes</b>: option boxes arrive from the content stream in pieces (a circle is
+ * 4 Bezier segments, a rounded rect is 4 corner arcs + 4 edge lines, a plain square a single
+ * small RectanglePrimitive). Small primitives are clustered by proximity and any cluster with
+ * a checkbox-sized union box is flagged. A tick mark drawn inside simply joins the cluster.
  *
- * <p>The OpenCV path for <i>scanned</i> pages remains Roadmap Phase 4; this covers the
- * native path that CL01-style generated forms need today.
+ * <p><b>Text glyphs</b>: Word-exported forms draw checkboxes as characters (U+2610 BALLOT BOX
+ * in MS-Gothic, etc.), invisible to the vector path. Those become candidates with an explicit
+ * {@code checked} attribute derived from the glyph itself.
+ *
+ * <p>The OpenCV path for <i>scanned</i> pages remains Roadmap Phase 4.
  */
 public class CheckboxDetector implements FieldCandidateDetector {
+
+    /** u F06F / u F0A8 are Wingdings private-use empty boxes; F0FE / F0FD checked. */
+    private static final Set<Character> UNCHECKED_GLYPHS = Set.of('\u2610', '\u25A1', '\u25A2', '\u2751', '\u2752', '\uF06F', '\uF0A8');
+    private static final Set<Character> CHECKED_GLYPHS = Set.of('\u2611', '\u2612', '\u25A0', '\u25A3', '\uF0FE', '\uF0FD');
 
     public static final String ID = "checkbox-detector";
 
@@ -54,20 +64,35 @@ public class CheckboxDetector implements FieldCandidateDetector {
 
     @Override
     public List<DetectionCandidate> detect(LayoutNode scope, PipelineContext ctx) {
+        List<DetectionCandidate> candidates = new ArrayList<>();
+
         List<VectorPrimitive> primitives = scope.attribute("vectorPrimitives");
-        if (primitives == null) {
-            return List.of();
+        if (primitives != null) {
+            for (Cluster cluster : clusterSmallPrimitives(primitives)) {
+                if (!isCheckboxShaped(cluster)) {
+                    continue;
+                }
+                candidates.add(new DetectionCandidate(
+                        ID, cluster.box, CandidateType.CHECKBOX, CONFIDENCE, cluster.page,
+                        Map.of("members", cluster.members.size())));
+            }
         }
 
-        List<Cluster> clusters = clusterSmallPrimitives(primitives);
-        List<DetectionCandidate> candidates = new ArrayList<>();
-        for (Cluster cluster : clusters) {
-            if (!isCheckboxShaped(cluster)) {
-                continue;
+        List<TextLine> lines = scope.attribute("textLines");
+        if (lines != null) {
+            for (TextLine line : lines) {
+                for (TextWord word : line.words()) {
+                    for (TextChar ch : word.chars()) {
+                        char c = ch.value().isEmpty() ? 0 : ch.value().charAt(0);
+                        boolean checked = CHECKED_GLYPHS.contains(c);
+                        if (checked || UNCHECKED_GLYPHS.contains(c)) {
+                            candidates.add(new DetectionCandidate(
+                                    ID, ch.box(), CandidateType.CHECKBOX, CONFIDENCE, line.page(),
+                                    Map.of("members", 1, "glyph", String.valueOf(c), "checked", checked)));
+                        }
+                    }
+                }
             }
-            candidates.add(new DetectionCandidate(
-                    ID, cluster.box, CandidateType.CHECKBOX, CONFIDENCE, cluster.page,
-                    Map.of("members", cluster.members.size())));
         }
         return candidates;
     }

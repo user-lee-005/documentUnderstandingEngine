@@ -135,9 +135,60 @@
           "name": "LIENT INFORMATION",
           "fields": [
             {
+              "label": "Detail of Chief Complaint (Reason for Visit)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                38.3,
+                610.7,
+                218.2,
+                615.9
+              ],
+              "valueBox": [
+                221.2,
+                608.7,
+                498.2,
+                618.9
+              ]
+            },
+            {
+              "label": "Date of Injury or Onset of Symptoms",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                36.0,
+                585.6,
+                190.2,
+                590.8
+              ],
+              "valueBox": [
+                193.2,
+                583.6,
+                470.2,
+                593.8
+              ]
+            },
+            {
+              "label": "Pertinent Lab/X-rays/Other Findings",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                572.8,
+                188.7,
+                578.1
+              ],
+              "valueBox": [
+                191.7,
+                570.8,
+                468.7,
+                581.1
+              ]
+            },
+            {
               "label": "Other Relevant Information",
               "type": "text",
-              "value": "​ ​",
+              "value": null,
               "labelBox": [
                 36.0,
                 560.1,
@@ -149,6 +200,28 @@
                 558.1,
                 433.2,
                 568.3
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                418.2,
+                535.7,
+                428.2,
+                540.6
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                458.0,
+                535.7,
+                468.0,
+                540.6
               ]
             },
             {
@@ -167,12 +240,40 @@
                 401.7,
                 531.9
               ]
-            }
-          ]
-        },
-        {
-          "name": "☐ YES ☐ NO",
-          "fields": [
+            },
+            {
+              "label": "Have You Recently Been Diagnosed with Any Infectious Illness?",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                36.0,
+                499.6,
+                296.3,
+                504.9
+              ],
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    350.6,
+                    499.6,
+                    360.6,
+                    504.6
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    390.4,
+                    499.6,
+                    400.4,
+                    504.6
+                  ],
+                  "selected": false
+                }
+              ]
+            },
             {
               "label": "If Yes, Please Explain",
               "type": "text",
@@ -189,10 +290,295 @@
                 401.7,
                 495.9
               ]
+            }
+          ]
+        },
+        {
+          "name": "MEDICATION AND SUPPLEMENTS",
+          "fields": [
+            {
+              "label": "Overall General Health",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                45.8,
+                383.1,
+                142.6,
+                388.3
+              ],
+              "options": [
+                {
+                  "name": "Regular",
+                  "box": [
+                    70.1,
+                    368.9,
+                    80.1,
+                    373.9
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "YES",
+                  "box": [
+                    86.4,
+                    355.6,
+                    96.4,
+                    360.6
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    126.2,
+                    355.6,
+                    136.2,
+                    360.6
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Vegetarian",
+                  "box": [
+                    135.3,
+                    368.9,
+                    145.3,
+                    373.9
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Poor",
+                  "box": [
+                    224.2,
+                    383.1,
+                    234.2,
+                    388.1
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Good",
+                  "box": [
+                    280.1,
+                    383.1,
+                    290.1,
+                    388.1
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Excellent",
+                  "box": [
+                    327.8,
+                    383.1,
+                    337.8,
+                    388.1
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                276.3,
+                368.9,
+                287.3,
+                374.4
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                210.5,
+                368.9,
+                220.5,
+                373.9
+              ]
+            },
+            {
+              "label": "Exercise",
+              "type": "text",
+              "value": "☐ YES ☐ NO",
+              "labelBox": [
+                45.8,
+                355.6,
+                81.8,
+                360.8
+              ],
+              "valueBox": [
+                84.8,
+                353.6,
+                192.5,
+                363.8
+              ]
+            },
+            {
+              "label": "If Yes Type/Frequency",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                196.5,
+                355.6,
+                287.7,
+                360.8
+              ],
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    287.2,
+                    329.3,
+                    297.2,
+                    334.3
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "YES",
+                  "box": [
+                    288.9,
+                    342.8,
+                    298.9,
+                    347.8
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    327.0,
+                    329.3,
+                    337.0,
+                    334.3
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    328.7,
+                    342.8,
+                    338.7,
+                    347.8
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": "Hypertension",
+              "type": "text",
+              "value": "☐ YES ☐ NO",
+              "labelBox": [
+                45.0,
+                342.8,
+                103.6,
+                348.0
+              ],
+              "valueBox": [
+                106.6,
+                340.8,
+                383.6,
+                351.0
+              ]
+            },
+            {
+              "label": "Gastrointestinal (Abdominal Pain, Vomiting, Diarrhea)",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                45.0,
+                329.3,
+                271.4,
+                334.5
+              ],
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    287.6,
+                    315.8,
+                    297.6,
+                    320.8
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "YES",
+                  "box": [
+                    288.2,
+                    302.3,
+                    298.2,
+                    307.3
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": "Stress/Anxiety/Depression or Psychiatric Conditions",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                45.0,
+                315.8,
+                262.7,
+                321.0
+              ],
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    288.5,
+                    288.8,
+                    298.5,
+                    293.8
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    327.4,
+                    315.8,
+                    337.4,
+                    320.8
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                328.0,
+                302.3,
+                338.0,
+                307.3
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                371.5,
+                302.3,
+                381.5,
+                307.3
+              ]
             },
             {
               "label": "Cancer",
-              "type": "text",
+              "type": "checkbox-group",
               "value": null,
               "labelBox": [
                 47.3,
@@ -200,11 +586,17 @@
                 78.3,
                 294.0
               ],
-              "valueBox": [
-                81.3,
-                286.8,
-                358.3,
-                297.0
+              "options": [
+                {
+                  "name": "NO",
+                  "box": [
+                    328.3,
+                    288.8,
+                    338.3,
+                    293.8
+                  ],
+                  "selected": false
+                }
               ]
             },
             {
@@ -223,44 +615,56 @@
                 435.7,
                 283.5
               ]
-            }
-          ]
-        },
-        {
-          "name": "MEDICATION AND SUPPLEMENTS",
-          "fields": [
-            {
-              "label": "If Yes Type/Frequency",
-              "type": "text",
-              "value": null,
-              "labelBox": [
-                196.5,
-                355.6,
-                287.7,
-                360.8
-              ],
-              "valueBox": [
-                290.7,
-                353.6,
-                567.7,
-                363.8
-              ]
             },
             {
-              "label": "Hypertension",
+              "label": "If Yes to Any Question Above, Please Explain",
               "type": "text",
               "value": null,
               "labelBox": [
                 45.0,
-                342.8,
-                103.6,
-                348.0
+                248.3,
+                231.1,
+                253.5
               ],
               "valueBox": [
-                106.6,
-                340.8,
-                383.6,
-                351.0
+                234.1,
+                246.3,
+                511.1,
+                256.5
+              ]
+            },
+            {
+              "label": "Additional Notes (any relevant medical conditions)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                45.8,
+                222.4,
+                258.4,
+                227.6
+              ],
+              "valueBox": [
+                261.4,
+                220.4,
+                538.4,
+                230.6
+              ]
+            },
+            {
+              "label": "Disclaimer",
+              "type": "text",
+              "value": "I understand that Pranic Healing is not meant to replace conventional",
+              "labelBox": [
+                45.8,
+                199.3,
+                92.0,
+                204.6
+              ],
+              "valueBox": [
+                95.0,
+                197.3,
+                372.0,
+                207.6
               ]
             }
           ]

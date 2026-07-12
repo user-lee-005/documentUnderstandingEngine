@@ -84,9 +84,10 @@ public class FieldAssemblyResolver implements SemanticResolver {
             }
             double fontSize = ((Number) c.attributes().getOrDefault("fontSize", 0.0)).doubleValue();
             String text = (String) c.attributes().getOrDefault("text", "");
-            if (fontSize >= HEADING_MIN_FONT_PT && isMostlyUppercase(text) && text.length() >= 4) {
+            boolean hasGlyphBox = text.chars().anyMatch(ch -> isGlyphCheckbox(String.valueOf((char) ch)));
+            if (fontSize >= HEADING_MIN_FONT_PT && isMostlyUppercase(text) && text.length() >= 4 && !hasGlyphBox) {
                 headings.add(new Heading(text, c.box()));
-            } else if (c.rawConfidence() >= 0.8) {
+            } else if (c.rawConfidence() >= 0.8 && !hasGlyphBox) {
                 captions.add(c);
             }
             // low-confidence legacy labels are usually filled-in values, not captions — ignored
@@ -295,7 +296,10 @@ public class FieldAssemblyResolver implements SemanticResolver {
                     .orElse(null);
             if (caption == null) {
                 caption = captions.stream()
-                        .filter(l -> String.valueOf(l.attributes().get("text")).endsWith(":"))
+                        .filter(l -> {
+                            String t = String.valueOf(l.attributes().get("text"));
+                            return t.endsWith(":") || t.endsWith("?");
+                        })
                         .filter(l -> l.box().y0() < box.box().y1() && l.box().y1() > box.box().y0())
                         .filter(l -> l.box().x1() <= box.box().x0() && box.box().x0() - l.box().x1() < 250)
                         .min(Comparator.comparingDouble(l -> box.box().x0() - l.box().x1()))
@@ -322,8 +326,7 @@ public class FieldAssemblyResolver implements SemanticResolver {
                     .filter(l -> l.box().x0() >= box.box().x1() - 2 && l.box().x0() - box.box().x1() < 15)
                     .filter(l -> l.box().y0() < box.box().y1() && l.box().y1() > box.box().y0())
                     .map(TextLine::text).findFirst().orElse(null);
-            boolean checked = ((Number) box.attributes().getOrDefault("members", 1)).intValue() >= 3;
-            drafts.add(Draft.singleCheckbox(box, sentence, checked));
+            drafts.add(Draft.singleCheckbox(box, sentence, isChecked(box, false, 1)));
         }
     }
 
@@ -376,17 +379,40 @@ public class FieldAssemblyResolver implements SemanticResolver {
         List<SemanticField.Option> options = new ArrayList<>();
         int i = 1;
         for (DetectionCandidate box : group) {
-            int members = ((Number) box.attributes().getOrDefault("members", 1)).intValue();
-            boolean selected = group.size() > 1 ? members > minMembers : members >= 3;
+            boolean selected = isChecked(box, group.size() > 1, minMembers);
             String name = pageText.stream()
                     .flatMap(l -> l.words().stream())
+                    .filter(w -> !isGlyphCheckbox(w.text()))
                     .filter(w -> contains(box.box(), w.box()))
                     .map(w -> w.text()).reduce((a, b) -> a + " " + b)
+                    // glyph checkboxes contain only the glyph — the option name is the word right of it
+                    .or(() -> pageText.stream()
+                            .flatMap(l -> l.words().stream())
+                            .filter(w -> !isGlyphCheckbox(w.text()))
+                            .filter(w -> w.box().x0() >= box.box().x1() - 1 && w.box().x0() - box.box().x1() < 25)
+                            .filter(w -> w.box().y0() < box.box().y1() && w.box().y1() > box.box().y0())
+                            .min(Comparator.comparingDouble(w -> w.box().x0()))
+                            .map(w -> w.text()))
                     .orElse("option-" + i);
             options.add(new SemanticField.Option(name, box.box(), selected));
             i++;
         }
         return options;
+    }
+
+    /** A glyph checkbox carries its own state; vector clusters fall back to the members heuristic. */
+    private static boolean isChecked(DetectionCandidate box, boolean inGroup, int groupMinMembers) {
+        Object explicit = box.attributes().get("checked");
+        if (explicit instanceof Boolean b) {
+            return b;
+        }
+        int members = ((Number) box.attributes().getOrDefault("members", 1)).intValue();
+        return inGroup ? members > groupMinMembers : members >= 3;
+    }
+
+    private static boolean isGlyphCheckbox(String text) {
+        return text.length() == 1 && "☐□▢❑❒☑☒■▣"
+                .indexOf(text.charAt(0)) >= 0;
     }
 
     // ---------------------------------------------------------------- underlines

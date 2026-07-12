@@ -63,24 +63,43 @@ public class LabelDetector implements FieldCandidateDetector {
         return candidates;
     }
 
+    /**
+     * Wordy delimited captions exist: "Detail of Chief Complaint (Reason for Visit):" is
+     * 7 words; question captions ("...Any Complementary and Alternative Modalities?") run
+     * to 11. A trailing ':' or '?' is a strong caption signal regardless of case.
+     */
+    private static final int MAX_DELIMITED_CAPTION_WORDS = 12;
+    private static final int MAX_DELIMITED_CAPTION_CHARS = 90;
+
     private static void scoreCluster(List<TextWord> cluster, int page, List<DetectionCandidate> out) {
         String text = CaptionHeuristics.textOf(cluster);
         if (text.isEmpty()) {
             return;
         }
 
-        boolean endsWithColon = text.endsWith(":");
+        boolean delimited = text.endsWith(":") || text.endsWith("?");
         boolean shortRun = cluster.size() <= MAX_LABEL_WORDS && text.length() <= MAX_LABEL_CHARS;
+        boolean delimitedRun = cluster.size() <= MAX_DELIMITED_CAPTION_WORDS && text.length() <= MAX_DELIMITED_CAPTION_CHARS;
         boolean digitFree = text.chars().noneMatch(Character::isDigit);
 
         double confidence;
-        if (endsWithColon && shortRun) {
+        if (delimited && shortRun) {
             confidence = 0.99;
+        } else if (delimited && delimitedRun) {
+            confidence = 0.9;
         } else if (CaptionHeuristics.isFieldsetCaption(cluster, text)) {
             confidence = 0.85;
         } else if (shortRun && digitFree) {
             confidence = 0.6;
         } else {
+            // "Overall General Health: [] Poor [] Good" arrives as one cluster — the caption
+            // is the prefix up to the first ':'-terminated word
+            for (int i = 0; i < Math.min(cluster.size(), MAX_DELIMITED_CAPTION_WORDS) - 1; i++) {
+                if (cluster.get(i).text().endsWith(":")) {
+                    scoreCluster(cluster.subList(0, i + 1), page, out);
+                    return;
+                }
+            }
             return;
         }
 

@@ -55,7 +55,9 @@ public class TextPrimitiveExtractor implements PrimitiveExtractor<TextLine> {
 
             for (TextPosition tp : textPositions) {
                 String unicode = tp.getUnicode();
-                if (unicode == null || unicode.isBlank()) {
+                // U+200B: Word exports pepper zero-width spaces through text; Java does not
+                // treat them as whitespace, so isBlank() alone would keep them as value chars
+                if (unicode == null || unicode.isBlank() || unicode.equals("​")) {
                     flushWord(currentWord, words);
                     continue;
                 }
