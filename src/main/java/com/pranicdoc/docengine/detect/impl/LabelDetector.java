@@ -85,6 +85,9 @@ public class LabelDetector implements FieldCandidateDetector {
         }
 
         BoundingBox box = BoundingBox.unionOf(cluster.stream().map(TextWord::box).toList());
-        out.add(new DetectionCandidate(ID, box, CandidateType.LABEL, confidence, page, Map.of("text", text)));
+        double avgFontSize = cluster.stream().flatMap(w -> w.chars().stream())
+                .mapToDouble(c -> c.fontSize()).average().orElse(0.0);
+        out.add(new DetectionCandidate(ID, box, CandidateType.LABEL, confidence, page,
+                Map.of("text", text, "fontSize", avgFontSize)));
     }
 }

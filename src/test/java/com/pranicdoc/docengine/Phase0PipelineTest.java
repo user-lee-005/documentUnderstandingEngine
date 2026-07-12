@@ -35,12 +35,12 @@ class Phase0PipelineTest {
         DocumentResult result = new DocumentEngine().process(pdfFile);
 
         assertEquals(1, result.pageCount());
-        assertEquals(1, result.fields().size());
+        assertEquals(1, result.allFields().size());
 
-        FieldResult field = result.fields().get(0);
-        assertEquals("Name", field.name());
+        FieldResult field = result.allFields().get(0);
+        assertEquals("Name", field.label());
         assertTrue(field.confidence() > 0.0, "expected a positive confidence score, got " + field.confidence());
-        assertNotNull(field.coordinates());
+        assertNotNull(field.valueBox());
     }
 
     private void buildSyntheticPdf(File file) throws IOException {

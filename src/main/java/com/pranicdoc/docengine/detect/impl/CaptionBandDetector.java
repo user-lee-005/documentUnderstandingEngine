@@ -57,42 +57,47 @@ public class CaptionBandDetector implements FieldCandidateDetector {
             return List.of(); // leaf scope — this detector only makes sense with section context
         }
 
-        List<DetectionCandidate> candidates = new ArrayList<>();
+        // Collect every caption in the scope first: PDFBox emits each caption as its OWN
+        // TextLine (one per showText op), so side-by-side captions ("AGE" / "GENDER") never
+        // share a line — the right-neighbour bound must look across all of them.
+        List<Caption> captions = new ArrayList<>();
+        int page = scope.page();
         for (LayoutNode row : rows) {
             List<TextLine> lines = row.attribute("textLines");
             if (lines == null) {
                 continue;
             }
             for (TextLine line : lines) {
-                emitBandsForLine(line, scope.box(), candidates);
+                for (List<TextWord> cluster : CaptionHeuristics.clusters(line)) {
+                    String text = CaptionHeuristics.textOf(cluster);
+                    if (!text.isEmpty() && CaptionHeuristics.isFieldsetCaption(cluster, text)) {
+                        captions.add(new Caption(text, BoundingBox.unionOf(cluster.stream().map(TextWord::box).toList())));
+                    }
+                }
             }
         }
-        return candidates;
-    }
 
-    private static void emitBandsForLine(TextLine line, BoundingBox sectionBox, List<DetectionCandidate> out) {
-        List<List<TextWord>> clusters = CaptionHeuristics.clusters(line);
-        List<Caption> captions = new ArrayList<>();
-        for (List<TextWord> cluster : clusters) {
-            String text = CaptionHeuristics.textOf(cluster);
-            if (!text.isEmpty() && CaptionHeuristics.isFieldsetCaption(cluster, text)) {
-                captions.add(new Caption(text, BoundingBox.unionOf(cluster.stream().map(TextWord::box).toList())));
-            }
-        }
-        for (int i = 0; i < captions.size(); i++) {
-            Caption caption = captions.get(i);
-            double right = i + 1 < captions.size()
-                    ? captions.get(i + 1).box().x0() - NEXT_CAPTION_MARGIN_PTS
-                    : sectionBox.x1() - SECTION_EDGE_MARGIN_PTS;
+        List<DetectionCandidate> candidates = new ArrayList<>();
+        for (Caption caption : captions) {
+            double right = captions.stream()
+                    .filter(o -> o != caption && o.box().x0() > caption.box().x1())
+                    .filter(o -> verticalOverlap(o.box(), caption.box()) > caption.box().height() * 0.5)
+                    .mapToDouble(o -> o.box().x0() - NEXT_CAPTION_MARGIN_PTS)
+                    .min().orElse(scope.box().x1() - SECTION_EDGE_MARGIN_PTS);
             if (right - caption.box().x0() < 10.0) {
                 continue;
             }
             BoundingBox band = BoundingBox.of(
                     caption.box().x0(), caption.box().y0() - BAND_HEIGHT_PTS,
                     right, caption.box().y0() - BAND_TOP_GAP_PTS);
-            out.add(new DetectionCandidate(ID, band, CandidateType.WHITESPACE, CONFIDENCE, line.page(),
+            candidates.add(new DetectionCandidate(ID, band, CandidateType.WHITESPACE, CONFIDENCE, page,
                     Map.of("caption", caption.text())));
         }
+        return candidates;
+    }
+
+    private static double verticalOverlap(BoundingBox a, BoundingBox b) {
+        return Math.min(a.y1(), b.y1()) - Math.max(a.y0(), b.y0());
     }
 
     private record Caption(String text, BoundingBox box) {

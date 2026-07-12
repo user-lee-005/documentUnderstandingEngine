@@ -45,7 +45,7 @@ public final class DocumentEngineCli {
         if (args.length >= 2) {
             Path outputPath = Path.of(args[1]);
             Files.writeString(outputPath, json);
-            System.out.println("Wrote " + run.result().fields().size() + " field(s) to " + outputPath.toAbsolutePath());
+            System.out.println("Wrote " + run.result().allFields().size() + " field(s) to " + outputPath.toAbsolutePath());
         } else {
             System.out.println(json);
         }

@@ -36,9 +36,11 @@ class PdfDebugOverlayRendererTest {
         DebugRun run = new DocumentEngine().processWithDebug(pdfFile);
 
         // Only the nearer rectangle is close enough (within maxLabelToValueDistancePts) to pair
-        // with "Name:" — NaiveProximityResolver is strict 1-label-to-1-value, nearest only.
-        assertEquals(1, run.result().fields().size());
-        assertEquals("Name", run.result().fields().get(0).name());
+        // with "Name:". The farther one is no longer dropped: it surfaces as an unlabeled
+        // placement field — still strictly one candidate per box, never merged.
+        assertEquals(2, run.result().allFields().size());
+        assertEquals(1, run.result().allFields().stream().filter(f -> "Name".equals(f.label())).count());
+        assertEquals(1, run.result().allFields().stream().filter(f -> f.label() == null).count());
 
         DebugExport export = run.export();
         assertTrue(export.annotatedPdf().length > 0);

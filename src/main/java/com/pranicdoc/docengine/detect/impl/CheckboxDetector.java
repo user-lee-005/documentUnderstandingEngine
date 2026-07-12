@@ -30,13 +30,15 @@ public class CheckboxDetector implements FieldCandidateDetector {
     public static final String ID = "checkbox-detector";
 
     /** Primitives larger than this can't be part of a checkbox shape. */
-    private static final double MAX_MEMBER_EXTENT_PTS = 48.0;
+    private static final double MAX_MEMBER_EXTENT_PTS = 72.0;
     /** Two primitives closer than this (bbox gap) belong to the same shape. */
     private static final double CLUSTER_GAP_PTS = 2.5;
 
+    /** Caption background strips are ~6.5pt tall; real option boxes start around 8pt. */
     private static final double MIN_BOX_WIDTH_PTS = 6.0;
-    private static final double MAX_BOX_WIDTH_PTS = 48.0;
-    private static final double MIN_BOX_HEIGHT_PTS = 6.0;
+    /** Wide labelled option boxes ("NON-VEGETARIAN") reach ~65pt. */
+    private static final double MAX_BOX_WIDTH_PTS = 72.0;
+    private static final double MIN_BOX_HEIGHT_PTS = 7.5;
     private static final double MAX_BOX_HEIGHT_PTS = 18.0;
     private static final double CONFIDENCE = 0.75;
 
@@ -76,6 +78,9 @@ public class CheckboxDetector implements FieldCandidateDetector {
             BoundingBox box = vp.box();
             if (box.width() > MAX_MEMBER_EXTENT_PTS || box.height() > MAX_MEMBER_EXTENT_PTS) {
                 continue;
+            }
+            if (vp instanceof RectanglePrimitive rect && rect.filled()) {
+                continue; // filled strips are caption backgrounds/whiteouts, never checkbox outlines
             }
             Cluster home = null;
             for (Cluster cluster : clusters) {

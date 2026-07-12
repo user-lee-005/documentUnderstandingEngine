@@ -32,7 +32,7 @@ import com.pranicdoc.docengine.primitives.model.TextLine;
 import com.pranicdoc.docengine.primitives.model.VectorPrimitive;
 import com.pranicdoc.docengine.semantic.SemanticField;
 import com.pranicdoc.docengine.semantic.SemanticResolver;
-import com.pranicdoc.docengine.semantic.impl.NaiveProximityResolver;
+import com.pranicdoc.docengine.semantic.impl.FieldAssemblyResolver;
 import org.apache.pdfbox.pdmodel.PDDocument;
 
 import java.io.IOException;
@@ -76,7 +76,7 @@ public class PipelineRunner {
 
     public PipelineRunner() {
         ConfidenceEngine confidenceEngine = new ConfidenceEngine(new WeightedAverageConfidenceAggregator());
-        this.resolver = new NaiveProximityResolver(confidenceEngine);
+        this.resolver = new FieldAssemblyResolver(confidenceEngine);
     }
 
     public PipelineRunResult run(PDDocument document, String documentId, EngineConfig config) throws IOException {
