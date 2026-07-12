@@ -61,15 +61,16 @@ class GoldDatasetEvalTest {
     }
 
     /**
-     * Measured baseline (2026-07-12: LABEL 1.6%, VALUE 57.8%, OPTION 76.7%, GRID 75.0%)
-     * minus tolerance. Raise these as Phase 3+ lands. LABEL is near zero because this
-     * template's captions are colon-less, border-embedded, and extract as raw glyph codes
-     * (no ToUnicode CMap) — the top Phase 3 target.
+     * Measured baseline (2026-07-12, after GlyphTextRepairer + fieldset LabelDetector +
+     * baseline-geometry fix + same-type-only NMS: LABEL 100%, VALUE 57.8%, OPTION 86.7%,
+     * GRID 75.0%) minus tolerance. Raise these as Phase 3+ lands. VALUE is the next target:
+     * misses cluster in row-band fields (value written under a caption on a divider line,
+     * no dedicated detector yet).
      */
     private static final Map<Category, Double> RECALL_FLOOR = new EnumMap<>(Map.of(
-            Category.LABEL, 0.01,
+            Category.LABEL, 0.95,
             Category.VALUE, 0.55,
-            Category.OPTION, 0.70,
+            Category.OPTION, 0.80,
             Category.GRID, 0.70));
 
     private record Target(int page, BoundingBox box, Category category, String name) {

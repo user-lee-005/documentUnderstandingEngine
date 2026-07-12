@@ -29,7 +29,7 @@ public class TextPrimitiveExtractor implements PrimitiveExtractor<TextLine> {
         stripper.setStartPage(pageIndex + 1);
         stripper.setEndPage(pageIndex + 1);
         stripper.getText(document);
-        return stripper.lines();
+        return GlyphTextRepairer.repair(stripper.lines());
     }
 
     private static final class LineCapturingStripper extends PDFTextStripper {
@@ -83,9 +83,9 @@ public class TextPrimitiveExtractor implements PrimitiveExtractor<TextLine> {
         }
 
         private TextChar toTextChar(TextPosition tp) {
-            double topY = pageHeightPts - tp.getY();
-            double bottomY = topY - tp.getHeight();
-            BoundingBox box = BoundingBox.of(tp.getX(), bottomY, tp.getX() + tp.getWidth(), topY);
+            // tp.getY() is the BASELINE in top-down display coords; glyphs extend upward from it.
+            double baselineY = pageHeightPts - tp.getY();
+            BoundingBox box = BoundingBox.of(tp.getX(), baselineY, tp.getX() + tp.getWidth(), baselineY + tp.getHeight());
             String fontName = tp.getFont() != null ? tp.getFont().getName() : "unknown";
             return new TextChar(tp.getUnicode(), box, fontName, tp.getFontSizeInPt());
         }
