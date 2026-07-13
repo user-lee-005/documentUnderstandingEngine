@@ -7,6 +7,8 @@ import com.pranicdoc.docengine.layout.detectors.ColumnDetector;
 import com.pranicdoc.docengine.layout.detectors.HeaderFooterDetector;
 import com.pranicdoc.docengine.layout.detectors.HeaderFooterResult;
 import com.pranicdoc.docengine.layout.detectors.RepeatedBlockDetector;
+import com.pranicdoc.docengine.primitives.model.LinePrimitive;
+import com.pranicdoc.docengine.primitives.model.RectanglePrimitive;
 import com.pranicdoc.docengine.primitives.model.TextLine;
 import com.pranicdoc.docengine.primitives.model.VectorPrimitive;
 
@@ -122,7 +124,23 @@ public class DefaultLayoutAnalyzer implements LayoutAnalyzer {
         List<PositionedItem> items = new ArrayList<>();
         List<PositionedItem> spanning = new ArrayList<>();
         for (PositionedItem item : all) {
-            (item.box().height() <= MAX_ROW_FORMING_ITEM_HEIGHT_PTS ? items : spanning).add(item);
+            // Filled rects are decoration everywhere else in this pipeline (RectangleDetector/
+            // CheckboxDetector/FieldAssemblyResolver all skip them as banners/shading, never
+            // containers) — they must not drive row formation either. One filled shading strip
+            // per printed line, stacked edge-to-edge, is individually short enough to dodge the
+            // tall-item check above but chains every row it touches into one giant row.
+            boolean filledRect = item.payload() instanceof RectanglePrimitive rect && rect.filled();
+            // A vertical divider (LinePrimitive taller than it is wide) is a column separator,
+            // never row-defining content. A grid's per-cell vertical segments are each exactly
+            // one row tall — short enough to dodge the tall-item check — but sorted-by-y1
+            // processing lets one drag the running row boundary down early and silently bridge
+            // every row it touches. Horizontal rules (height ~= 0) don't have this problem and
+            // still help split rows correctly, so only the vertical case is excluded here; both
+            // still reattach to every row they overlap via the spanning pool below.
+            boolean verticalDivider = item.payload() instanceof LinePrimitive
+                    && item.box().height() > item.box().width();
+            boolean formsRows = item.box().height() <= MAX_ROW_FORMING_ITEM_HEIGHT_PTS && !filledRect && !verticalDivider;
+            (formsRows ? items : spanning).add(item);
         }
         if (items.isEmpty()) {
             items = spanning; // page is nothing but tall content — fall back to clustering it directly
@@ -155,15 +173,23 @@ public class DefaultLayoutAnalyzer implements LayoutAnalyzer {
 
         // A cluster that is nothing but thin horizontal rules is a row BOUNDARY, not a row —
         // fold it into the row above. Without this, ruled tables alternate content-row /
-        // rule-row and RepeatedBlockDetector can never see 3 consecutive identical rows.
+        // rule-row and RepeatedBlockDetector can never see 3 consecutive identical rows. Cap it
+        // at one fold per content row (its own immediate boundary), though — an oversized blank
+        // cell can leave a SECOND rule line far below the first (that cell's own far bottom
+        // edge), and folding that one in too would stretch the row's box down through the empty
+        // gap, breaking its signature match with the other repeating rows.
         List<List<PositionedItem>> withBoundariesFolded = new ArrayList<>();
+        List<Boolean> alreadyFoldedInto = new ArrayList<>();
         for (List<PositionedItem> group : rowGroups) {
             boolean ruleOnly = group.stream().allMatch(
                 it -> it.payload() instanceof VectorPrimitive && it.box().height() <= 2.0);
-            if (ruleOnly && !withBoundariesFolded.isEmpty()) {
-                withBoundariesFolded.get(withBoundariesFolded.size() - 1).addAll(group);
+            int lastIdx = withBoundariesFolded.size() - 1;
+            if (ruleOnly && lastIdx >= 0 && !alreadyFoldedInto.get(lastIdx)) {
+                withBoundariesFolded.get(lastIdx).addAll(group);
+                alreadyFoldedInto.set(lastIdx, true);
             } else {
                 withBoundariesFolded.add(group);
+                alreadyFoldedInto.add(false);
             }
         }
         rowGroups = withBoundariesFolded;
@@ -172,10 +198,15 @@ public class DefaultLayoutAnalyzer implements LayoutAnalyzer {
         int idx = 0;
         for (List<PositionedItem> group : rowGroups) {
             BoundingBox rowBox = BoundingBox.unionOf(group.stream().map(PositionedItem::box).toList());
-            // spanning items (tall rules, containers, rotated labels) rejoin every row they overlap
+            // spanning items (tall rules, containers, rotated labels) rejoin every row they
+            // meaningfully overlap. A horizontal boundary line unioned into rowBox can stretch
+            // it a hair past the row's real content extent, sliver-touching the NEXT row's
+            // spanning items (e.g. a grid's per-cell vlines) at the shared boundary — requiring
+            // more than a sliver of overlap keeps that from double-attaching a neighbor's items.
             List<PositionedItem> members = new ArrayList<>(group);
             for (PositionedItem tall : spanning) {
-                if (tall.box().y0() <= rowBox.y1() && tall.box().y1() >= rowBox.y0()) {
+                double overlapDepth = Math.min(tall.box().y1(), rowBox.y1()) - Math.max(tall.box().y0(), rowBox.y0());
+                if (overlapDepth > 2.0) {
                     members.add(tall);
                 }
             }
@@ -184,6 +215,13 @@ public class DefaultLayoutAnalyzer implements LayoutAnalyzer {
             LayoutNode row = new LayoutNode(column.id() + "-row-" + idx, LayoutNodeType.ROW, rowBox, column.page());
             row.putAttribute("textLines", rowLines);
             row.putAttribute("vectorPrimitives", rowVectors);
+            // Reattached spanning items (rotated category labels, table-wide boundary lines)
+            // overlap rows incidentally, not because they're that row's own repeating content —
+            // a rotated "MAJOR CHAKRAS" label happens to reach 2 of 28 otherwise-identical chakra
+            // rows and nothing distinguishes those 2 structurally. Recording the row's own
+            // pre-reattachment counts lets RepeatedBlockDetector's signature ignore that noise.
+            row.putAttribute("ownLineCount", group.stream().filter(it -> it.payload() instanceof TextLine).count());
+            row.putAttribute("ownVectorCount", group.stream().filter(it -> it.payload() instanceof VectorPrimitive).count());
             rows.add(row);
             idx++;
         }

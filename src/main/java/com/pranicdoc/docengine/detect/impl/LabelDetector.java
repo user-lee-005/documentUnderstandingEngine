@@ -77,7 +77,12 @@ public class LabelDetector implements FieldCandidateDetector {
             return;
         }
 
-        boolean delimited = text.endsWith(":") || text.endsWith("?");
+        // Signature-block idiom ("Client Name (please print)", "Client Signature __") has no
+        // colon or question mark, but a trailing parenthetical hint or an inline blank drawn as
+        // underscores is just as strong a caption signal — nobody types those as real values.
+        boolean parentheticalHint = text.endsWith(")") && text.contains("(");
+        boolean underscoreBlank = text.endsWith("__");
+        boolean delimited = text.endsWith(":") || text.endsWith("?") || parentheticalHint || underscoreBlank;
         boolean shortRun = cluster.size() <= MAX_LABEL_WORDS && text.length() <= MAX_LABEL_CHARS;
         boolean delimitedRun = cluster.size() <= MAX_DELIMITED_CAPTION_WORDS && text.length() <= MAX_DELIMITED_CAPTION_CHARS;
         boolean digitFree = text.chars().noneMatch(Character::isDigit);

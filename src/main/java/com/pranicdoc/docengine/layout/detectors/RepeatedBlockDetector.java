@@ -45,11 +45,30 @@ public class RepeatedBlockDetector implements LayoutDetector {
     }
 
     private String signature(LayoutNode row) {
-        List<TextLine> lines = row.attribute("textLines");
-        List<VectorPrimitive> vectors = row.attribute("vectorPrimitives");
-        int lineCount = lines == null ? 0 : lines.size();
-        int vectorCount = vectors == null ? 0 : vectors.size();
-        int heightBucket = (int) Math.round(row.box().height() / 2.0);
-        return lineCount + ":" + vectorCount + ":" + heightBucket;
+        // Prefer the row's own pre-reattachment counts when DefaultLayoutAnalyzer recorded them:
+        // a reattached spanning item (a rotated category label, a table-wide boundary line) can
+        // overlap just 2-3 rows out of a much longer otherwise-identical run purely by geometric
+        // coincidence, and counting it would make those rows look structurally different from
+        // their neighbors for no real reason.
+        Long ownLines = row.attribute("ownLineCount");
+        Long ownVectors = row.attribute("ownVectorCount");
+        int lineCount;
+        int vectorCount;
+        if (ownLines != null && ownVectors != null) {
+            lineCount = ownLines.intValue();
+            vectorCount = ownVectors.intValue();
+        } else {
+            List<TextLine> lines = row.attribute("textLines");
+            List<VectorPrimitive> vectors = row.attribute("vectorPrimitives");
+            lineCount = lines == null ? 0 : lines.size();
+            vectorCount = vectors == null ? 0 : vectors.size();
+        }
+        // Grid-edge rows (first/last) naturally carry one fewer shared boundary line and a
+        // slightly shorter reattached-content box than interior rows of the same repeating
+        // structure — bucketing coarsely (instead of exact counts) tolerates that without
+        // losing the ability to tell genuinely different row shapes apart.
+        int vectorBucket = vectorCount / 5;
+        int heightBucket = (int) Math.round(row.box().height() / 8.0);
+        return lineCount + ":" + vectorBucket + ":" + heightBucket;
     }
 }

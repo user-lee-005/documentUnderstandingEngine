@@ -98,6 +98,7 @@ public class FieldAssemblyResolver implements SemanticResolver {
         List<DetectionCandidate> underlines = new ArrayList<>();
         List<DetectionCandidate> captionBands = new ArrayList<>();
         List<DetectionCandidate> tables = new ArrayList<>();
+        List<DetectionCandidate> vlines = new ArrayList<>();
         for (DetectionCandidate c : candidates) {
             switch (c.type()) {
                 case RECTANGLE, IMAGE_PLACEHOLDER -> {
@@ -107,6 +108,7 @@ public class FieldAssemblyResolver implements SemanticResolver {
                 }
                 case CHECKBOX -> checkboxes.add(c);
                 case UNDERLINE -> underlines.add(c);
+                case VLINE -> vlines.add(c);
                 case WHITESPACE -> {
                     if (c.attributes().containsKey("caption")) {
                         captionBands.add(c);
@@ -221,10 +223,12 @@ public class FieldAssemblyResolver implements SemanticResolver {
         }
 
         // 5b. still-unclaimed colon captions ("Client's Name:") own the writing band to their
-        //     RIGHT — Word-style forms leave that space blank, so no primitive candidate exists
+        //     RIGHT — Word-style forms leave that space blank, so no primitive candidate exists.
+        //     If a drawn column-divider rule sits between the caption and that space (a design
+        //     column separating labels from values), the band starts just past the rule instead
+        //     of hugging the caption text; with no rule, it defaults to right next to the label.
         for (DetectionCandidate caption : captions) {
-            if (claimedCaptions.contains(caption)
-                    || !String.valueOf(caption.attributes().get("text")).endsWith(":")) {
+            if (claimedCaptions.contains(caption) || !isColonLikeCaption(String.valueOf(caption.attributes().get("text")))) {
                 continue;
             }
             double right = captions.stream()
@@ -236,9 +240,17 @@ public class FieldAssemblyResolver implements SemanticResolver {
             if (right - caption.box().x1() < 20) {
                 continue;
             }
+            double left = vlines.stream()
+                    .filter(v -> v.box().x0() > caption.box().x1() && v.box().x0() < right)
+                    .filter(v -> v.box().y0() <= caption.box().centerY() && v.box().y1() >= caption.box().centerY())
+                    .mapToDouble(v -> v.box().x0() + 3)
+                    .min().orElse(caption.box().x1() + 3);
+            if (right - left < 20) {
+                left = caption.box().x1() + 3;
+            }
             claimedCaptions.add(caption);
             drafts.add(Draft.labelled(caption, null,
-                    BoundingBox.of(caption.box().x1() + 3, caption.box().y0() - 2, right, caption.box().y1() + 3)));
+                    BoundingBox.of(left, caption.box().y0() - 2, right, caption.box().y1() + 3)));
         }
 
         // 5b. tables
@@ -413,6 +425,13 @@ public class FieldAssemblyResolver implements SemanticResolver {
     private static boolean isGlyphCheckbox(String text) {
         return text.length() == 1 && "☐□▢❑❒☑☒■▣"
                 .indexOf(text.charAt(0)) >= 0;
+    }
+
+    /** Mirrors LabelDetector's "delimited" signal: a colon, question mark, trailing parenthetical
+     * hint, or inline underscore blank all mark a caption whose write area sits to its right. */
+    private static boolean isColonLikeCaption(String text) {
+        return text.endsWith(":") || text.endsWith("?")
+                || (text.endsWith(")") && text.contains("(")) || text.endsWith("__");
     }
 
     // ---------------------------------------------------------------- underlines

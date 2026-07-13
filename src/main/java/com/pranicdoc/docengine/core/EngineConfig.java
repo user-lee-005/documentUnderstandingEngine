@@ -43,6 +43,7 @@ public record EngineConfig(
                 "rectangle-detector", 1.0,
                 "label-detector", 1.0,
                 "underline-detector", 0.9,
+                "vertical-rule-detector", 0.9,
                 "checkbox-detector", 0.85,
                 "table-detector", 0.85,
                 "image-placeholder-detector", 0.8,

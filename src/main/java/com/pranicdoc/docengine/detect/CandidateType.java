@@ -3,6 +3,7 @@ package com.pranicdoc.docengine.detect;
 public enum CandidateType {
     RECTANGLE,
     UNDERLINE,
+    VLINE,
     CHECKBOX,
     RADIO,
     TABLE,

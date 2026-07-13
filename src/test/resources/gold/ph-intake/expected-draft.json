@@ -11,6 +11,17 @@
           "name": "CLIENT INFORMATION",
           "fields": [
             {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                30.0,
+                644.5,
+                571.0,
+                695.5
+              ]
+            },
+            {
               "label": "Today’s Date",
               "type": "date",
               "value": null,
@@ -21,7 +32,7 @@
                 690.9
               ],
               "valueBox": [
-                92.7,
+                303.5,
                 683.7,
                 369.7,
                 693.9
@@ -166,6 +177,17 @@
                 583.6,
                 470.2,
                 593.8
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                36.0,
+                560.1,
+                190.2,
+                590.8
               ]
             },
             {
@@ -489,6 +511,17 @@
               ]
             },
             {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                45.0,
+                315.8,
+                356.1,
+                348.0
+              ]
+            },
+            {
               "label": "Gastrointestinal (Abdominal Pain, Vomiting, Diarrhea)",
               "type": "checkbox-group",
               "value": null,
@@ -665,6 +698,51 @@
                 197.3,
                 372.0,
                 207.6
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                45.8,
+                160.7,
+                545.2,
+                204.6
+              ]
+            },
+            {
+              "label": "Client Name (please print)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                125.7,
+                143.2,
+                130.9
+              ],
+              "valueBox": [
+                146.2,
+                123.7,
+                176.0,
+                133.9
+              ]
+            },
+            {
+              "label": "Client Signature __",
+              "type": "signature",
+              "value": null,
+              "labelBox": [
+                180.0,
+                125.7,
+                257.9,
+                130.9
+              ],
+              "valueBox": [
+                260.9,
+                123.7,
+                537.9,
+                133.9
               ]
             }
           ]

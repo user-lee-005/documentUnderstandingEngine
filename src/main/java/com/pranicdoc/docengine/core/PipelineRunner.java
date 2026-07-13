@@ -14,6 +14,7 @@ import com.pranicdoc.docengine.detect.impl.LabelDetector;
 import com.pranicdoc.docengine.detect.impl.RectangleDetector;
 import com.pranicdoc.docengine.detect.impl.TableDetector;
 import com.pranicdoc.docengine.detect.impl.UnderlineDetector;
+import com.pranicdoc.docengine.detect.impl.VerticalRuleDetector;
 import com.pranicdoc.docengine.detect.impl.WhitespaceDetector;
 import com.pranicdoc.docengine.graph.DocumentGraph;
 import com.pranicdoc.docengine.graph.LayoutGraphBuilder;
@@ -64,6 +65,7 @@ public class PipelineRunner {
     private final DetectorRegistry detectorRegistry = new DetectorRegistry(List.of(
         new RectangleDetector(),
         new UnderlineDetector(),
+        new VerticalRuleDetector(),
         new LabelDetector(),
         new WhitespaceDetector(),
         new ImagePlaceholderDetector(),

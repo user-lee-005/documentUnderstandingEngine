@@ -28,6 +28,17 @@
               ]
             },
             {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                35.8,
+                664.2,
+                104.1,
+                696.9
+              ]
+            },
+            {
               "label": "Today's Date",
               "type": "date",
               "value": null,
@@ -156,6 +167,22 @@
               ]
             },
             {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                33.0,
+                540.5,
+                587.0,
+                577.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "(O/U/N) (C/D/N) (O/U/N) (C/D/N)",
+          "fields": [
+            {
               "label": "ler’s Notes",
               "type": "text",
               "value": null,
@@ -170,6 +197,17 @@
                 529.1,
                 582.0,
                 538.8
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                33.0,
+                239.9,
+                263.0,
+                507.6
               ]
             },
             {
@@ -207,14 +245,47 @@
               ]
             },
             {
+              "label": "Instructions for Client (Check boxes)",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                33.3,
+                184.4,
+                182.2,
+                189.6
+              ],
+              "options": [
+                {
+                  "name": "Relax",
+                  "box": [
+                    38.6,
+                    171.7,
+                    48.6,
+                    176.6
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Meditation",
+                  "box": [
+                    38.6,
+                    158.9,
+                    48.6,
+                    163.9
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
               "label": null,
-              "type": "checkbox",
-              "value": "false",
+              "type": "table",
+              "value": null,
               "valueBox": [
-                38.6,
-                171.7,
-                48.6,
-                176.6
+                33.0,
+                118.5,
+                578.0,
+                181.5
               ]
             },
             {
@@ -226,17 +297,6 @@
                 171.7,
                 305.0,
                 176.6
-              ]
-            },
-            {
-              "label": null,
-              "type": "checkbox",
-              "value": "false",
-              "valueBox": [
-                38.6,
-                158.9,
-                48.6,
-                163.9
               ]
             },
             {
