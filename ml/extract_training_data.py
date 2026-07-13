@@ -54,10 +54,22 @@ FEATURE_COLUMNS = [
     "text_has_digit", "font_size",
     "attr_members", "attr_checked", "attr_filled", "attr_aggregate",
     "attr_rows", "attr_cols", "attr_row", "attr_col", "attr_caption",
+    # relational features — a candidate's OWN geometry says nothing about whether it fits a
+    # repeating structure or has a plausible pairing partner nearby; these look at its siblings
+    # on the same page (see relational_features()).
+    "nearest_complementary_distance", "same_page_candidate_count",
+    "row_band_count", "row_band_same_type_count",
     # diagnostic columns, not model inputs — kept so we can eyeball WHY a label landed
     # where it did before trusting the column as a training target
     "matched_gold", "matched_category", "matched_gold_name", "best_iou", "best_coverage",
 ]
+
+# A LABEL's plausible pairing partner is one of these VALUE-ish types, and vice versa —
+# mirrors CATEGORY_CLAIMABLE_BY["VALUE"] since that's the same "what can a value area be" set
+# the eval harness (and FieldAssemblyResolver) already treats as equivalent.
+VALUE_ISH_TYPES = CATEGORY_CLAIMABLE_BY["VALUE"]
+NO_NEIGHBOR_SENTINEL = 9999.0
+ROW_BAND_TOLERANCE_PTS = 6.0
 
 
 def main():
@@ -96,13 +108,61 @@ def extract_sample(sample_name, expected_json_path, debug_json_path):
     targets = load_targets(expected_json_path)
     candidates = json.loads(debug_json_path.read_text(encoding="utf-8"))["candidates"]
 
+    by_page = {}
+    for c in candidates:
+        by_page.setdefault(c["page"], []).append(c)
+
     rows = []
     for c in candidates:
-        rows.append(candidate_to_row(sample_name, c, targets))
+        page_siblings = by_page[c["page"]]
+        rel = relational_features(c, page_siblings)
+        rows.append(candidate_to_row(sample_name, c, targets, rel))
     return rows
 
 
-def candidate_to_row(sample_name, c, targets):
+def relational_features(c, page_siblings):
+    """Features about a candidate's SIBLINGS on the same page — its own box says nothing about
+    whether a plausible pairing partner sits nearby, or whether it fits a repeating row pattern;
+    both are exactly the kind of context a fixed per-candidate threshold can't see but a model
+    with these columns can."""
+    box = c["box"]
+    cx, cy = (box["x0"] + box["x1"]) / 2.0, (box["y0"] + box["y1"]) / 2.0
+    ctype = c["type"]
+
+    if ctype == "LABEL":
+        complementary_types = VALUE_ISH_TYPES
+    elif ctype in VALUE_ISH_TYPES:
+        complementary_types = {"LABEL"}
+    else:
+        complementary_types = None
+
+    nearest_complementary = NO_NEIGHBOR_SENTINEL
+    row_band_count = 0
+    row_band_same_type_count = 0
+    for other in page_siblings:
+        if other is c:
+            continue
+        ob = other["box"]
+        ocx, ocy = (ob["x0"] + ob["x1"]) / 2.0, (ob["y0"] + ob["y1"]) / 2.0
+
+        if complementary_types is not None and other["type"] in complementary_types:
+            dist = ((cx - ocx) ** 2 + (cy - ocy) ** 2) ** 0.5
+            nearest_complementary = min(nearest_complementary, dist)
+
+        if abs(ocy - cy) <= ROW_BAND_TOLERANCE_PTS:
+            row_band_count += 1
+            if other["type"] == ctype:
+                row_band_same_type_count += 1
+
+    return {
+        "nearest_complementary_distance": round(nearest_complementary, 2),
+        "same_page_candidate_count": len(page_siblings) - 1,
+        "row_band_count": row_band_count,
+        "row_band_same_type_count": row_band_same_type_count,
+    }
+
+
+def candidate_to_row(sample_name, c, targets, relational):
     box = c["box"]
     x0, y0, x1, y1 = box["x0"], box["y0"], box["x1"], box["y1"]
     attrs = c.get("attributes") or {}
@@ -137,6 +197,7 @@ def candidate_to_row(sample_name, c, targets):
         "attr_col": attrs.get("col", ""),
         "attr_caption": attrs.get("caption", ""),
     }
+    row.update(relational)
 
     best = best_match(c, targets)
     row["matched_gold"] = int(best is not None)

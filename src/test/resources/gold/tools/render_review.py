@@ -1,9 +1,30 @@
-"""Render review overlays: blue=labelBox, green=valueBox, orange=option/checkbox, purple=grid."""
+"""Render review overlays: blue=labelBox, green=valueBox, orange=option/checkbox, purple=grid.
+
+Usage: python render_review.py <gold-dir> [json-filename]
+  <gold-dir>      e.g. src/test/resources/gold/intake-form-v2
+  [json-filename]  defaults to expected.json if present, else expected-draft.json — pass this
+                    explicitly to re-render a draft mid-review before it's promoted.
+
+Re-run this after hand-editing a draft/expected JSON to visually confirm your coordinate fixes
+landed where you meant them to, before promoting expected-draft.json -> expected.json.
+"""
 import json
+import os
+import sys
+
 import pdfplumber
 from PIL import ImageDraw
 
-GOLD_DIR = r"E:\PranicDoc\PranicDoc\documentUnderstandingEngine\src\test\resources\gold\cl01"
+GOLD_DIR = sys.argv[1] if len(sys.argv) > 1 else \
+    r"E:\PranicDoc\PranicDoc\documentUnderstandingEngine\src\test\resources\gold\cl01"
+
+if len(sys.argv) > 2:
+    JSON_NAME = sys.argv[2]
+elif os.path.exists(os.path.join(GOLD_DIR, "expected.json")):
+    JSON_NAME = "expected.json"
+else:
+    JSON_NAME = "expected-draft.json"
+
 SCALE = 2.0  # 144 dpi
 
 
@@ -14,10 +35,10 @@ def draw_box(draw, H, box, color, width=2):
     draw.rectangle([x0, (H - y1 / SCALE) * SCALE, x1, (H - y0 / SCALE) * SCALE], outline=color, width=width)
 
 
-gold = json.load(open(GOLD_DIR + r"\expected.json", encoding="utf-8"))
+gold = json.load(open(os.path.join(GOLD_DIR, JSON_NAME), encoding="utf-8"))
 pages_gold = {p["page"]: p for p in gold["pages"]}
 
-with pdfplumber.open(GOLD_DIR + r"\source.pdf") as pdf:
+with pdfplumber.open(os.path.join(GOLD_DIR, "source.pdf")) as pdf:
     for pi, page in enumerate(pdf.pages):
         pg = pages_gold.get(pi)
         if not pg or not pg["sections"]:
@@ -50,6 +71,6 @@ with pdfplumber.open(GOLD_DIR + r"\source.pdf") as pdf:
         for s in pg["sections"]:
             for f in s["fields"]:
                 walk_field(f)
-        out = GOLD_DIR + fr"\review-page-{pi}.png"
+        out = os.path.join(GOLD_DIR, f"review-page-{pi}.png")
         im.original.save(out)
         print("wrote", out)

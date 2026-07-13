@@ -9,3 +9,7 @@ out/
 
 *.log
 .DS_Store
+
+# trained model artifacts — regenerate with `python ml/train_model.py`, don't accumulate
+# retrained binaries in git history
+ml/models/
