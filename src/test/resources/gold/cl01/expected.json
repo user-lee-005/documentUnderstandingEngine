@@ -1,0 +1,1870 @@
+{
+  "formType": "CL01",
+  "formTitle": "CONFIDENTIAL HEALING DATA SHEET",
+  "pageCount": 9,
+  "pages": [
+    {
+      "page": 0,
+      "sections": []
+    },
+    {
+      "page": 1,
+      "sections": [
+        {
+          "name": "PATIENT INFORMATION",
+          "note": "No printed heading on the form; top block of page 1",
+          "fields": [
+            {
+              "label": "PATIENT'S NAME",
+              "type": "text",
+              "value": "Test User 1",
+              "static": true,
+              "labelBox": [
+                54.2,
+                739.6,
+                108.0,
+                746.1
+              ],
+              "valueBox": [
+                54.6,
+                722.1,
+                280.1,
+                731.8
+              ]
+            },
+            {
+              "label": "AGE",
+              "type": "number",
+              "value": "16",
+              "static": true,
+              "labelBox": [
+                54.2,
+                714.9,
+                71.4,
+                721.3
+              ],
+              "valueBox": [
+                54.2,
+                695.9,
+                105.0,
+                712.9
+              ]
+            },
+            {
+              "label": "GENDER",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "M",
+                  "box": [
+                    113.1,
+                    699.6,
+                    125.3,
+                    711.8
+                  ]
+                },
+                {
+                  "name": "F",
+                  "box": [
+                    137.9,
+                    699.6,
+                    150.1,
+                    711.8
+                  ]
+                }
+              ],
+              "value": "M",
+              "static": true,
+              "labelBox": [
+                108.9,
+                714.9,
+                138.0,
+                721.3
+              ]
+            },
+            {
+              "label": "MARITAL STATUS",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "SINGLE",
+                  "box": [
+                    165.4,
+                    700.7,
+                    196.8,
+                    710.7
+                  ]
+                },
+                {
+                  "name": "MARRIED",
+                  "box": [
+                    202.8,
+                    700.7,
+                    239.0,
+                    710.7
+                  ]
+                },
+                {
+                  "name": "OTHERS",
+                  "box": [
+                    245.0,
+                    700.7,
+                    279.2,
+                    710.7
+                  ]
+                }
+              ],
+              "value": "SINGLE",
+              "static": true,
+              "labelBox": [
+                163.6,
+                714.9,
+                219.1,
+                721.3
+              ]
+            },
+            {
+              "label": "EMAIL",
+              "type": "text",
+              "value": "test_user1@gmail.com",
+              "static": true,
+              "labelBox": [
+                54.2,
+                690.1,
+                76.4,
+                696.5
+              ],
+              "valueBox": [
+                54.2,
+                671.1,
+                280.0,
+                688.1
+              ]
+            },
+            {
+              "label": "CONTACT / WHATSAPP",
+              "type": "text",
+              "value": "9080675237",
+              "static": true,
+              "labelBox": [
+                54.2,
+                665.3,
+                126.0,
+                671.8
+              ],
+              "valueBox": [
+                54.2,
+                646.3,
+                280.0,
+                663.3
+              ]
+            },
+            {
+              "label": "OCCUPATION",
+              "type": "text",
+              "value": "Software Engineer",
+              "static": true,
+              "labelBox": [
+                54.2,
+                640.6,
+                97.3,
+                647.0
+              ],
+              "valueBox": [
+                54.2,
+                621.6,
+                280.0,
+                638.6
+              ]
+            },
+            {
+              "label": "ADDRESS LINE 1 & 2",
+              "type": "text",
+              "value": "Test Line 1\nTest Line 2\nCoimbatore",
+              "static": true,
+              "labelBox": [
+                314.6,
+                739.6,
+                379.2,
+                746.1
+              ],
+              "valueBox": [
+                314.9,
+                673.8,
+                540.4,
+                731.8
+              ]
+            },
+            {
+              "label": "CITY",
+              "type": "text",
+              "value": "Coimbatore",
+              "static": true,
+              "labelBox": [
+                314.6,
+                665.3,
+                331.6,
+                671.8
+              ],
+              "valueBox": [
+                314.6,
+                646.3,
+                455.0,
+                663.3
+              ]
+            },
+            {
+              "label": "STATE",
+              "type": "text",
+              "value": "Tamil Nadu",
+              "static": true,
+              "labelBox": [
+                314.6,
+                640.6,
+                337.1,
+                647.0
+              ],
+              "valueBox": [
+                314.6,
+                621.6,
+                455.0,
+                638.6
+              ]
+            },
+            {
+              "label": "ZIP / PINCODE",
+              "type": "text",
+              "value": "641008",
+              "static": true,
+              "labelBox": [
+                463.3,
+                640.6,
+                508.2,
+                647.0
+              ],
+              "valueBox": [
+                463.3,
+                621.6,
+                540.0,
+                638.6
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PATIENT'S CONDITION",
+          "fields": [
+            {
+              "label": "MEDICAL CONDITION / DIAGNOSIS",
+              "type": "text",
+              "value": "Neck pain for 5 days",
+              "static": true,
+              "labelBox": [
+                54.2,
+                541.5,
+                159.6,
+                548.0
+              ],
+              "valueBox": [
+                54.6,
+                375.4,
+                342.1,
+                533.8
+              ]
+            },
+            {
+              "label": "SYMPTOMS",
+              "type": "array",
+              "itemType": "text",
+              "static": false,
+              "arrayEvidence": "numbered caption sequence SYMPTOM 1..4, identical geometry, fixed pitch",
+              "labelBox": [
+                376.5,
+                541.5,
+                415.2,
+                548.0
+              ],
+              "groupBox": [
+                371.9,
+                371.4,
+                545.4,
+                544.8
+              ],
+              "items": [
+                {
+                  "index": 1,
+                  "labelBox": [
+                    376.5,
+                    506.9,
+                    415.2,
+                    513.3
+                  ],
+                  "valueBox": [
+                    376.5,
+                    487.9,
+                    537.4,
+                    504.9
+                  ],
+                  "value": "Headache"
+                },
+                {
+                  "index": 2,
+                  "labelBox": [
+                    376.5,
+                    472.2,
+                    415.2,
+                    478.6
+                  ],
+                  "valueBox": [
+                    376.5,
+                    453.2,
+                    537.4,
+                    470.2
+                  ],
+                  "value": "Cough"
+                },
+                {
+                  "index": 3,
+                  "labelBox": [
+                    376.5,
+                    437.5,
+                    415.2,
+                    444.0
+                  ],
+                  "valueBox": [
+                    376.5,
+                    418.5,
+                    537.4,
+                    435.5
+                  ],
+                  "value": null
+                },
+                {
+                  "index": 4,
+                  "labelBox": [
+                    376.5,
+                    402.9,
+                    415.2,
+                    409.3
+                  ],
+                  "valueBox": [
+                    376.5,
+                    383.9,
+                    537.4,
+                    400.9
+                  ],
+                  "value": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DECLARATION",
+          "fields": [
+            {
+              "label": "Not meant to replace conventional medicine",
+              "type": "checkbox",
+              "value": true,
+              "static": true,
+              "valueBox": [
+                49.6,
+                309.2,
+                58.2,
+                317.9
+              ]
+            },
+            {
+              "label": "Release from liabilities",
+              "type": "checkbox",
+              "value": true,
+              "static": true,
+              "valueBox": [
+                49.6,
+                288.9,
+                58.2,
+                297.6
+              ]
+            },
+            {
+              "label": "Consent to use testimonial",
+              "type": "checkbox",
+              "value": true,
+              "static": true,
+              "valueBox": [
+                49.6,
+                257.5,
+                58.2,
+                266.2
+              ]
+            },
+            {
+              "label": "SIGNATURE OF THE PATIENT",
+              "type": "signature",
+              "value": "Test User 1",
+              "static": true,
+              "labelBox": [
+                61.4,
+                207.2,
+                150.8,
+                213.7
+              ],
+              "valueBox": [
+                152.8,
+                211.5,
+                290.2,
+                223.5
+              ]
+            },
+            {
+              "label": "DATE",
+              "type": "date",
+              "value": "28/06/2026",
+              "static": true,
+              "labelBox": [
+                207.1,
+                207.2,
+                226.8,
+                213.7
+              ],
+              "valueBox": [
+                228.8,
+                211.5,
+                290.2,
+                223.5
+              ]
+            },
+            {
+              "label": "NAME OF THE HEALER",
+              "type": "text",
+              "value": "Pranic Healer Venkatesh",
+              "static": true,
+              "labelBox": [
+                321.7,
+                207.2,
+                393.5,
+                213.7
+              ],
+              "valueBox": [
+                395.5,
+                211.5,
+                550.6,
+                223.5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "HEALING DETAILS",
+          "fields": [
+            {
+              "label": "HEALING DETAILS",
+              "type": "text",
+              "value": "Test Protocol",
+              "static": true,
+              "labelBox": [
+                54.2,
+                182.5,
+                111.8,
+                188.9
+              ],
+              "valueBox": [
+                54.6,
+                53.5,
+                416.5,
+                174.7
+              ]
+            },
+            {
+              "label": "BASIC BOOK PG. NO.",
+              "type": "number",
+              "value": "12",
+              "static": true,
+              "labelBox": [
+                450.9,
+                182.5,
+                517.0,
+                188.9
+              ],
+              "valueBox": [
+                451.3,
+                145.6,
+                540.4,
+                180.5
+              ]
+            },
+            {
+              "label": "ADVANCED BOOK PG. NO.",
+              "type": "number",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                450.9,
+                137.1,
+                531.6,
+                143.6
+              ],
+              "valueBox": [
+                451.3,
+                100.2,
+                540.4,
+                135.1
+              ]
+            },
+            {
+              "label": "PSYCHOTHERAPY PG. NO.",
+              "type": "number",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                450.9,
+                91.7,
+                532.6,
+                98.2
+              ],
+              "valueBox": [
+                451.3,
+                53.5,
+                540.4,
+                89.7
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "sections": [
+        {
+          "name": "FINDINGS AND OTHER INFORMATION",
+          "note": "No printed heading; top half of page 2",
+          "fields": [
+            {
+              "label": "PERTINENT LAB, XRAY AND OTHER FINDINGS",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.1,
+                739.7,
+                192.8,
+                746.1
+              ],
+              "valueBox": [
+                54.5,
+                524.0,
+                280.0,
+                731.9
+              ]
+            },
+            {
+              "label": "ANY OTHER RELEVANT INFORMATION",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                314.4,
+                739.7,
+                430.6,
+                746.1
+              ],
+              "valueBox": [
+                314.8,
+                524.0,
+                540.3,
+                731.9
+              ]
+            },
+            {
+              "label": "ARE YOU CURRENTLY PRACTISING OR RECEIVING ANY COMPLEMENTARY OR ALTERNATIVE MODALITIES?",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    61.7,
+                    462.8,
+                    93.1,
+                    472.8
+                  ]
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    98.6,
+                    462.8,
+                    134.8,
+                    472.8
+                  ]
+                }
+              ],
+              "value": "NO",
+              "static": true,
+              "labelBox": [
+                54.1,
+                492.1,
+                221.0,
+                498.5
+              ]
+            },
+            {
+              "label": "If yes, explain here (modalities)",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "valueBox": [
+                54.5,
+                276.4,
+                280.0,
+                440.8
+              ]
+            },
+            {
+              "label": "HAVE YOU RECENTLY BEEN DIAGNOSED WITH ANY INFECTIOUS ILLNESS?",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    61.7,
+                    462.8,
+                    93.1,
+                    472.8
+                  ]
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    98.6,
+                    462.8,
+                    134.8,
+                    472.8
+                  ]
+                }
+              ],
+              "value": "NO",
+              "static": true,
+              "labelBox": [
+                314.4,
+                492.1,
+                470.0,
+                498.5
+              ]
+            },
+            {
+              "label": "If yes, explain here (infectious illness)",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "valueBox": [
+                314.8,
+                276.4,
+                540.3,
+                440.8
+              ]
+            }
+          ]
+        },
+        {
+          "name": "MEDICATION AND SUPPLEMENTS",
+          "fields": [
+            {
+              "label": "MEDICATION AND SUPPLEMENTS",
+              "type": "array",
+              "itemType": "text",
+              "static": false,
+              "arrayEvidence": "6 structurally identical numbered containers in a 3x2 grid",
+              "items": [
+                {
+                  "index": 1,
+                  "valueBox": [
+                    54.5,
+                    152.6,
+                    193.2,
+                    193.2
+                  ],
+                  "value": "Paracetamil | 500"
+                },
+                {
+                  "index": 2,
+                  "valueBox": [
+                    228.0,
+                    152.6,
+                    366.7,
+                    193.2
+                  ],
+                  "value": null
+                },
+                {
+                  "index": 3,
+                  "valueBox": [
+                    401.5,
+                    152.6,
+                    540.3,
+                    193.2
+                  ],
+                  "value": null
+                },
+                {
+                  "index": 4,
+                  "valueBox": [
+                    54.5,
+                    78.3,
+                    193.2,
+                    118.9
+                  ],
+                  "value": null
+                },
+                {
+                  "index": 5,
+                  "valueBox": [
+                    228.0,
+                    78.3,
+                    366.7,
+                    118.9
+                  ],
+                  "value": null
+                },
+                {
+                  "index": 6,
+                  "valueBox": [
+                    401.5,
+                    78.3,
+                    540.3,
+                    118.9
+                  ],
+                  "value": null
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 3,
+      "sections": [
+        {
+          "name": "MEDICAL, SURGICAL AND SOCIAL HISTORY",
+          "fields": [
+            {
+              "label": "OVERALL GENERAL HEALTH",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "GOOD",
+                  "box": [
+                    56.9,
+                    700.8,
+                    88.2,
+                    710.8
+                  ]
+                },
+                {
+                  "name": "POOR",
+                  "box": [
+                    93.7,
+                    700.8,
+                    129.9,
+                    710.8
+                  ]
+                },
+                {
+                  "name": "EXCELLENT",
+                  "box": [
+                    135.4,
+                    700.8,
+                    188.5,
+                    710.8
+                  ]
+                }
+              ],
+              "value": "GOOD",
+              "static": true,
+              "labelBox": [
+                54.0,
+                714.9,
+                143.8,
+                721.4
+              ]
+            },
+            {
+              "label": "DIET",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "VEGETARIAN",
+                  "box": [
+                    56.9,
+                    651.2,
+                    112.5,
+                    661.2
+                  ]
+                },
+                {
+                  "name": "NON-VEGETARIAN",
+                  "box": [
+                    118.0,
+                    651.2,
+                    186.3,
+                    661.2
+                  ]
+                },
+                {
+                  "name": "VEGAN",
+                  "box": [
+                    191.8,
+                    651.2,
+                    225.2,
+                    661.2
+                  ]
+                }
+              ],
+              "value": "VEGETARIAN",
+              "static": true,
+              "labelBox": [
+                54.0,
+                665.4,
+                71.8,
+                671.9
+              ]
+            },
+            {
+              "label": "DIET - if others, please write here",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "valueBox": [
+                311.0,
+                647.9,
+                535.3,
+                664.6
+              ]
+            },
+            {
+              "label": "EXERCISE",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    56.9,
+                    601.7,
+                    88.2,
+                    611.7
+                  ]
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    93.7,
+                    601.7,
+                    129.9,
+                    611.7
+                  ]
+                }
+              ],
+              "value": "YES",
+              "static": true,
+              "labelBox": [
+                54.0,
+                615.9,
+                88.2,
+                622.3
+              ]
+            },
+            {
+              "label": "EXERCISE - if yes, what is the frequency",
+              "type": "text",
+              "value": "WEEKLY",
+              "static": true,
+              "valueBox": [
+                220.0,
+                598.3,
+                535.3,
+                615.1
+              ]
+            },
+            {
+              "label": "HYPERTENSION",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    56.9,
+                    552.2,
+                    88.2,
+                    562.2
+                  ]
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    93.7,
+                    552.2,
+                    129.9,
+                    562.2
+                  ]
+                }
+              ],
+              "value": "NO",
+              "static": true,
+              "labelBox": [
+                54.0,
+                566.3,
+                104.9,
+                572.8
+              ]
+            },
+            {
+              "label": "GASTROINTESTINAL (ABDOMINAL PAIN, VOMITING, DIARRHEA)",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    56.9,
+                    502.7,
+                    88.2,
+                    512.7
+                  ]
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    93.7,
+                    502.7,
+                    129.9,
+                    512.7
+                  ]
+                }
+              ],
+              "value": "YES",
+              "static": true,
+              "labelBox": [
+                54.0,
+                516.8,
+                246.1,
+                523.3
+              ]
+            },
+            {
+              "label": "STRESS, DEPRESSION, ANXIETY OR PSYCHIATRIC CONDITION",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    56.9,
+                    453.1,
+                    88.2,
+                    463.1
+                  ]
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    93.7,
+                    453.1,
+                    129.9,
+                    463.1
+                  ]
+                }
+              ],
+              "value": "YES",
+              "static": true,
+              "labelBox": [
+                54.0,
+                467.3,
+                241.2,
+                473.8
+              ]
+            },
+            {
+              "label": "ARE YOU PREGNANT",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    56.9,
+                    403.6,
+                    88.2,
+                    413.6
+                  ]
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    93.7,
+                    403.6,
+                    129.9,
+                    413.6
+                  ]
+                },
+                {
+                  "name": "NOT SURE",
+                  "box": [
+                    135.4,
+                    403.6,
+                    184.2,
+                    413.6
+                  ]
+                }
+              ],
+              "value": "NO",
+              "static": true,
+              "labelBox": [
+                54.0,
+                417.8,
+                121.0,
+                424.2
+              ]
+            },
+            {
+              "label": "CANCER",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    61.8,
+                    349.0,
+                    93.1,
+                    359.0
+                  ]
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    98.6,
+                    349.0,
+                    134.8,
+                    359.0
+                  ]
+                }
+              ],
+              "value": "NO",
+              "static": true,
+              "labelBox": [
+                54.1,
+                368.2,
+                83.3,
+                374.7
+              ]
+            },
+            {
+              "label": "CANCER - if yes, specify location",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "valueBox": [
+                54.5,
+                301.2,
+                540.4,
+                335.0
+              ]
+            },
+            {
+              "label": "IF YES TO ANY LOCATION ABOVE, PLEASE EXPLAIN MORE",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.1,
+                269.2,
+                231.2,
+                275.7
+              ],
+              "valueBox": [
+                54.5,
+                177.4,
+                540.4,
+                261.4
+              ]
+            },
+            {
+              "label": "ADDITIONAL NOTES (ANY RELEVANT MEDICAL CONDITIONS)",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.1,
+                145.3,
+                236.8,
+                151.8
+              ],
+              "valueBox": [
+                54.5,
+                53.6,
+                540.4,
+                137.6
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 4,
+      "sections": [
+        {
+          "name": "SCANNING RESULTS - BEFORE & AFTER HEALING",
+          "fields": [
+            {
+              "label": "SCANNING RESULTS",
+              "type": "table",
+              "columns": [
+                "chakra",
+                "energyLevelBefore",
+                "energyLevelAfter",
+                "activationLevelBefore",
+                "activationLevelAfter"
+              ],
+              "legend": "U=underactivated O=overactivated N=normal C=congested D=depleted; energy level C/D/N; activation level U/O/N",
+              "rowGroups": {
+                "MAJOR CHAKRAS": [
+                  "Basic",
+                  "Sex",
+                  "Navel",
+                  "Meng Mein",
+                  "Front Spleen",
+                  "Back Spleen",
+                  "Front Solar Plexus",
+                  "Back Solar Plexus",
+                  "Front Heart",
+                  "Back Heart",
+                  "Throat",
+                  "Ajna",
+                  "Forehead",
+                  "Crown"
+                ],
+                "MINOR CHAKRAS": [
+                  "Back Head",
+                  "Left Temple",
+                  "Right Temple",
+                  "Left Jaw",
+                  "Right Jaw",
+                  "Secondary Throat",
+                  "Left Hand",
+                  "Right Hand",
+                  "Left Sole",
+                  "Right Sole",
+                  "Perineum"
+                ],
+                "ORGANS & MINI CHAKRAS": [
+                  "",
+                  "",
+                  ""
+                ]
+              },
+              "rows": [],
+              "static": false,
+              "grid": {
+                "bbox": [
+                  49.6,
+                  37.1,
+                  545.4,
+                  705.7
+                ],
+                "rowYs": [
+                  37.1,
+                  61.9,
+                  86.7,
+                  111.4,
+                  136.2,
+                  160.9,
+                  185.7,
+                  210.5,
+                  235.2,
+                  260.0,
+                  284.8,
+                  309.5,
+                  334.3,
+                  359.0,
+                  383.8,
+                  408.6,
+                  433.3,
+                  458.1,
+                  482.9,
+                  507.6,
+                  532.4,
+                  557.1,
+                  581.9,
+                  606.7,
+                  631.4,
+                  656.2,
+                  680.9,
+                  705.7
+                ],
+                "colXs": [
+                  44.5,
+                  247.9,
+                  347.1,
+                  446.2
+                ],
+                "note": "rowYs = horizontal rule positions (row boundaries); colXs = vertical rule positions. Cell(i,j) = between consecutive boundaries. REVIEW against page 4 rendering."
+              },
+              "arrayEvidence": "ruled grid of uniform rows; pre-printed row-header column (chakra names)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "sections": [
+        {
+          "name": "FEEDBACK FROM PATIENTS",
+          "fields": [
+            {
+              "label": "SYMPTOM IMPROVEMENT",
+              "type": "table",
+              "columns": [
+                "healingNo",
+                "healingDate",
+                "symptom1Scale",
+                "symptom2Scale",
+                "symptom3Scale",
+                "symptom4Scale"
+              ],
+              "columnHeaders": {
+                "symptom1": "Headache",
+                "symptom2": "Cough",
+                "symptom3": null,
+                "symptom4": null
+              },
+              "legend": "Scale 0-10; 0 means no-discomfort, 10 quite severe",
+              "rows": [
+                {
+                  "healingNo": "1",
+                  "healingDate": "28/06/2026",
+                  "symptom1Scale": null,
+                  "symptom2Scale": null,
+                  "symptom3Scale": null,
+                  "symptom4Scale": null
+                }
+              ],
+              "static": false,
+              "grid": {
+                "bbox": [
+                  49.6,
+                  420.9,
+                  545.4,
+                  718.1
+                ],
+                "rowYs": [
+                  445.7,
+                  470.5,
+                  495.2,
+                  520.0,
+                  544.8,
+                  569.5,
+                  594.3,
+                  619.0,
+                  643.8,
+                  668.6,
+                  693.3
+                ],
+                "colXs": [
+                  99.2,
+                  173.5,
+                  266.5,
+                  359.5,
+                  452.4
+                ],
+                "note": "column bands: healingNo | healingDate | symptom1..4; rowYs are row boundaries"
+              },
+              "arrayEvidence": "ruled grid of uniform rows",
+              "symptomNameSlots": [
+                {
+                  "index": 1,
+                  "labelBox": [
+                    178.2,
+                    739.6,
+                    231.7,
+                    746.1
+                  ],
+                  "valueBox": [
+                    177.5,
+                    719.6,
+                    262.5,
+                    738.6
+                  ]
+                },
+                {
+                  "index": 2,
+                  "labelBox": [
+                    271.2,
+                    739.6,
+                    324.6,
+                    746.1
+                  ],
+                  "valueBox": [
+                    270.5,
+                    719.6,
+                    355.5,
+                    738.6
+                  ]
+                },
+                {
+                  "index": 3,
+                  "labelBox": [
+                    364.1,
+                    739.6,
+                    417.6,
+                    746.1
+                  ],
+                  "valueBox": [
+                    363.5,
+                    719.6,
+                    448.4,
+                    738.6
+                  ]
+                },
+                {
+                  "index": 4,
+                  "labelBox": [
+                    457.1,
+                    739.6,
+                    510.6,
+                    746.1
+                  ],
+                  "valueBox": [
+                    456.4,
+                    719.6,
+                    541.4,
+                    738.6
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "PATIENT'S INTERIM FEEDBACK 1",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.2,
+                368.2,
+                151.2,
+                374.6
+              ],
+              "valueBox": [
+                54.6,
+                250.8,
+                242.9,
+                360.4
+              ]
+            },
+            {
+              "label": "PATIENT'S INTERIM FEEDBACK 1 - HEALING NO.",
+              "type": "number",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.2,
+                244.4,
+                97.3,
+                250.8
+              ],
+              "valueBox": [
+                54.2,
+                224.8,
+                112.2,
+                242.4
+              ]
+            },
+            {
+              "label": "PATIENT'S INTERIM FEEDBACK 1 - DATE",
+              "type": "date",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                116.2,
+                244.4,
+                136.3,
+                250.8
+              ],
+              "valueBox": [
+                116.2,
+                224.8,
+                239.9,
+                242.4
+              ]
+            },
+            {
+              "label": "PATIENT'S INTERIM FEEDBACK 2",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.2,
+                194.9,
+                151.2,
+                201.3
+              ],
+              "valueBox": [
+                54.6,
+                77.5,
+                242.9,
+                187.1
+              ]
+            },
+            {
+              "label": "PATIENT'S INTERIM FEEDBACK 2 - HEALING NO.",
+              "type": "number",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.2,
+                71.0,
+                97.3,
+                77.5
+              ],
+              "valueBox": [
+                54.2,
+                51.5,
+                112.2,
+                69.0
+              ]
+            },
+            {
+              "label": "PATIENT'S INTERIM FEEDBACK 2 - DATE",
+              "type": "date",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                116.2,
+                71.0,
+                136.3,
+                77.5
+              ],
+              "valueBox": [
+                116.2,
+                51.5,
+                239.9,
+                69.0
+              ]
+            },
+            {
+              "label": "PATIENT'S FINAL FEEDBACK",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                277.4,
+                368.2,
+                365.4,
+                374.6
+              ],
+              "valueBox": [
+                277.7,
+                77.5,
+                540.4,
+                360.4
+              ]
+            },
+            {
+              "label": "PATIENT'S FINAL FEEDBACK - HEALING NO.",
+              "type": "number",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                277.4,
+                71.0,
+                320.5,
+                77.5
+              ],
+              "valueBox": [
+                277.4,
+                51.5,
+                335.4,
+                69.0
+              ]
+            },
+            {
+              "label": "PATIENT'S FINAL FEEDBACK - DATE",
+              "type": "date",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                339.4,
+                71.0,
+                359.5,
+                77.5
+              ],
+              "valueBox": [
+                339.4,
+                51.5,
+                537.4,
+                69.0
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "sections": [
+        {
+          "name": "FEEDBACK FROM PATIENTS (CONTINUED)",
+          "fields": [
+            {
+              "label": "SYMPTOM IMPROVEMENT",
+              "type": "table",
+              "columns": [
+                "healingNo",
+                "healingDate",
+                "symptom1Scale",
+                "symptom2Scale",
+                "symptom3Scale",
+                "symptom4Scale"
+              ],
+              "columnHeaders": {
+                "symptom1": null,
+                "symptom2": null,
+                "symptom3": null,
+                "symptom4": null
+              },
+              "rows": [],
+              "static": false,
+              "grid": {
+                "bbox": [
+                  49.6,
+                  420.9,
+                  545.4,
+                  718.1
+                ],
+                "rowYs": [
+                  445.7,
+                  470.5,
+                  495.2,
+                  520.0,
+                  544.8,
+                  569.5,
+                  594.3,
+                  619.0,
+                  643.8,
+                  668.6,
+                  693.3
+                ],
+                "colXs": [
+                  99.2,
+                  173.5,
+                  266.5,
+                  359.5,
+                  452.4
+                ],
+                "note": "column bands: healingNo | healingDate | symptom1..4; rowYs are row boundaries"
+              },
+              "arrayEvidence": "ruled grid of uniform rows",
+              "symptomNameSlots": [
+                {
+                  "index": 1,
+                  "labelBox": [
+                    178.2,
+                    739.6,
+                    231.7,
+                    746.1
+                  ],
+                  "valueBox": [
+                    177.5,
+                    719.6,
+                    262.5,
+                    738.6
+                  ]
+                },
+                {
+                  "index": 2,
+                  "labelBox": [
+                    271.2,
+                    739.6,
+                    324.6,
+                    746.1
+                  ],
+                  "valueBox": [
+                    270.5,
+                    719.6,
+                    355.5,
+                    738.6
+                  ]
+                },
+                {
+                  "index": 3,
+                  "labelBox": [
+                    364.1,
+                    739.6,
+                    417.6,
+                    746.1
+                  ],
+                  "valueBox": [
+                    363.5,
+                    719.6,
+                    448.4,
+                    738.6
+                  ]
+                },
+                {
+                  "index": 4,
+                  "labelBox": [
+                    457.1,
+                    739.6,
+                    510.6,
+                    746.1
+                  ],
+                  "valueBox": [
+                    456.4,
+                    719.6,
+                    541.4,
+                    738.6
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "PATIENT'S INTERIM FEEDBACK 1",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.2,
+                368.2,
+                151.2,
+                374.6
+              ],
+              "valueBox": [
+                54.6,
+                250.8,
+                242.9,
+                360.4
+              ]
+            },
+            {
+              "label": "PATIENT'S INTERIM FEEDBACK 2",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.2,
+                194.9,
+                151.2,
+                201.3
+              ],
+              "valueBox": [
+                54.6,
+                77.5,
+                242.9,
+                187.1
+              ]
+            },
+            {
+              "label": "PATIENT'S FINAL FEEDBACK",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                277.4,
+                368.2,
+                365.4,
+                374.6
+              ],
+              "valueBox": [
+                277.7,
+                77.5,
+                540.4,
+                360.4
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 7,
+      "sections": [
+        {
+          "name": "HEALER'S UNDERSTANDING OF PROTOCOL USED",
+          "fields": [
+            {
+              "label": "PROTOCOL TABLE",
+              "type": "table",
+              "columns": [
+                "chakrasOrgansAffectedAndReason",
+                "cleansingColors",
+                "energisingColors"
+              ],
+              "rows": [],
+              "static": false,
+              "grid": {
+                "bbox": [
+                  49.6,
+                  49.5,
+                  545.4,
+                  742.8
+                ],
+                "rowYs": [
+                  99.0,
+                  148.6,
+                  198.1,
+                  247.6,
+                  297.1,
+                  346.7,
+                  396.2,
+                  445.7,
+                  495.2,
+                  544.8,
+                  594.3,
+                  643.8,
+                  693.3
+                ],
+                "colXs": [
+                  214.9,
+                  380.1
+                ]
+              },
+              "arrayEvidence": "ruled grid of uniform rows, 3 captioned columns"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": 8,
+      "sections": [
+        {
+          "name": "CLOSING SUMMARY",
+          "note": "No printed heading; final page",
+          "fields": [
+            {
+              "label": "HEALER'S ADDITIONAL COMMENTS",
+              "type": "text",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                54.2,
+                789.1,
+                163.5,
+                795.6
+              ],
+              "valueBox": [
+                54.6,
+                152.6,
+                540.4,
+                781.4
+              ]
+            },
+            {
+              "label": "TOTAL NO. OF HEALINGS",
+              "type": "number",
+              "value": "1",
+              "static": true,
+              "labelBox": [
+                54.2,
+                120.6,
+                132.7,
+                127.0
+              ],
+              "valueBox": [
+                54.6,
+                103.0,
+                267.7,
+                118.8
+              ]
+            },
+            {
+              "label": "IS THE HEALING STILL CONTINUED?",
+              "type": "checkbox-group",
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    465.3,
+                    106.5,
+                    496.6,
+                    116.4
+                  ]
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    502.2,
+                    106.5,
+                    538.4,
+                    116.4
+                  ]
+                }
+              ],
+              "value": "NO",
+              "static": true,
+              "labelBox": [
+                302.2,
+                120.6,
+                412.9,
+                127.0
+              ]
+            },
+            {
+              "label": "LAST HEALING DATE",
+              "type": "date",
+              "value": "2026-06-28",
+              "static": true,
+              "labelBox": [
+                54.2,
+                46.3,
+                119.8,
+                52.8
+              ],
+              "valueBox": [
+                121.8,
+                50.5,
+                196.3,
+                62.5
+              ]
+            },
+            {
+              "label": "LAST FEEDBACK DATE",
+              "type": "date",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                228.1,
+                46.3,
+                300.2,
+                52.8
+              ],
+              "valueBox": [
+                302.2,
+                50.5,
+                370.1,
+                62.5
+              ]
+            },
+            {
+              "label": "SIGNATURE OF THE HEALER",
+              "type": "signature",
+              "value": null,
+              "static": true,
+              "labelBox": [
+                401.3,
+                46.3,
+                490.2,
+                52.8
+              ],
+              "valueBox": [
+                492.2,
+                50.5,
+                543.4,
+                62.5
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "coordinateSystem": "PDF points, bottom-left origin, per page; box = [x0, y0, x1, y1]"
+}

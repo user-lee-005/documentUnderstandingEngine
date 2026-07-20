@@ -1,0 +1,373 @@
+{
+  "_draft": "ENGINE OUTPUT, UNREVIEWED — verify against review-page-N.png, correct, then rename to expected.json",
+  "formType": "ph-treatment",
+  "pageCount": 2,
+  "coordinateSystem": "PDF points, bottom-left origin, per page; box = [x0, y0, x1, y1]",
+  "pages": [
+    {
+      "page": 0,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Client’s Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                35.8,
+                691.2,
+                100.3,
+                696.9
+              ],
+              "valueBox": [
+                103.3,
+                689.2,
+                380.3,
+                699.9
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                35.8,
+                664.2,
+                104.1,
+                696.9
+              ]
+            },
+            {
+              "label": "Today's Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                35.8,
+                677.7,
+                94.9,
+                683.4
+              ],
+              "valueBox": [
+                97.9,
+                675.7,
+                374.9,
+                686.4
+              ]
+            },
+            {
+              "label": "Healer’s Name",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                35.8,
+                664.2,
+                104.1,
+                669.9
+              ],
+              "options": [
+                {
+                  "name": "option-1",
+                  "box": [
+                    124.9,
+                    650.7,
+                    135.9,
+                    656.2
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": "Type of Healing",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                35.8,
+                650.7,
+                107.5,
+                656.4
+              ],
+              "options": [
+                {
+                  "name": "In-Person",
+                  "box": [
+                    101.8,
+                    622.2,
+                    112.8,
+                    627.7
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "option-2",
+                  "box": [
+                    186.1,
+                    650.7,
+                    197.1,
+                    656.2
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "option-3",
+                  "box": [
+                    256.1,
+                    650.7,
+                    267.1,
+                    656.2
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": "Current Session Goal",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                35.8,
+                637.2,
+                131.1,
+                642.9
+              ],
+              "options": [
+                {
+                  "name": "Distant",
+                  "box": [
+                    170.3,
+                    622.2,
+                    181.3,
+                    627.7
+                  ],
+                  "selected": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "PRANIC HEALING SESSION",
+          "fields": [
+            {
+              "label": "Document Chakral Condition",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                33.3,
+                571.0,
+                179.8,
+                577.3
+              ],
+              "valueBox": [
+                182.8,
+                569.0,
+                459.8,
+                580.3
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                33.0,
+                540.5,
+                587.0,
+                577.3
+              ]
+            }
+          ]
+        },
+        {
+          "name": "(O/U/N) (C/D/N) (O/U/N) (C/D/N)",
+          "fields": [
+            {
+              "label": "ler’s Notes",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                282.4,
+                531.1,
+                323.7,
+                535.8
+              ],
+              "valueBox": [
+                326.7,
+                529.1,
+                582.0,
+                538.8
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                33.0,
+                239.9,
+                263.0,
+                507.6
+              ]
+            },
+            {
+              "label": "Complaint(s) & Protocol(s) Used",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                268.0,
+                357.9,
+                387.3,
+                362.5
+              ],
+              "valueBox": [
+                390.3,
+                355.9,
+                582.0,
+                365.5
+              ]
+            },
+            {
+              "label": "Client Comments",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                33.3,
+                209.9,
+                114.3,
+                215.7
+              ],
+              "valueBox": [
+                117.3,
+                207.9,
+                394.3,
+                218.7
+              ]
+            },
+            {
+              "label": "Instructions for Client (Check boxes)",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                33.3,
+                184.4,
+                182.2,
+                189.6
+              ],
+              "options": [
+                {
+                  "name": "Relax",
+                  "box": [
+                    38.6,
+                    171.7,
+                    48.6,
+                    176.6
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Meditation",
+                  "box": [
+                    38.6,
+                    158.9,
+                    48.6,
+                    163.9
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                33.0,
+                118.5,
+                578.0,
+                181.5
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                295.0,
+                171.7,
+                305.0,
+                176.6
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                295.0,
+                158.9,
+                305.0,
+                163.9
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                38.6,
+                146.2,
+                48.6,
+                151.1
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                295.0,
+                146.2,
+                305.0,
+                151.1
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                38.6,
+                133.4,
+                48.6,
+                138.4
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                295.0,
+                133.4,
+                305.0,
+                138.4
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                38.6,
+                120.7,
+                48.6,
+                125.6
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

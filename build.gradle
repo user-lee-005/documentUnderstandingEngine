@@ -1,0 +1,75 @@
+plugins {
+    id 'java-library'
+    id 'application'
+    id 'maven-publish'
+}
+
+group = 'com.pranicdoc'
+version = '0.1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = 'com.pranicdoc.docengine.cli.DocumentEngineCli'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // --- PDF parsing (public API leaks PDDocument/PDPage types) ---
+    api 'org.apache.pdfbox:pdfbox:3.0.7'
+
+    // --- Output serialization ---
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.3'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.17.3'
+
+    // --- OCR (Tesseract via JNA) — Phase 4, declared now per full-stack-from-day-one decision ---
+    implementation 'net.sourceforge.tess4j:tess4j:5.11.0'
+
+    // --- Computer vision (OpenCV with bundled natives) — Phase 4 ---
+    implementation 'org.bytedeco:opencv-platform:4.9.0-1.5.10'
+
+    // --- ONNX Runtime (for future layout/checkbox inference models) — Phase 4+ ---
+    implementation 'com.microsoft.onnxruntime:onnxruntime:1.18.0'
+
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.3'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testCompileOnly 'org.projectlombok:lombok:1.18.32'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-parameters']
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'document-understanding-engine'
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/PranicDoc/document-understanding-engine")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+}

@@ -1,0 +1,753 @@
+{
+  "_draft": "ENGINE OUTPUT, UNREVIEWED — verify against review-page-N.png, correct, then rename to expected.json",
+  "formType": "ph-intake",
+  "pageCount": 1,
+  "coordinateSystem": "PDF points, bottom-left origin, per page; box = [x0, y0, x1, y1]",
+  "pages": [
+    {
+      "page": 0,
+      "sections": [
+        {
+          "name": "CLIENT INFORMATION",
+          "fields": [
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                30.0,
+                644.5,
+                571.0,
+                695.5
+              ]
+            },
+            {
+              "label": "Today’s Date",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                36.0,
+                685.7,
+                89.7,
+                690.9
+              ],
+              "valueBox": [
+                303.5,
+                683.7,
+                369.7,
+                693.9
+              ]
+            },
+            {
+              "label": "Client Name",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                672.9,
+                88.5,
+                678.1
+              ],
+              "valueBox": [
+                91.5,
+                670.9,
+                302.0,
+                681.1
+              ]
+            },
+            {
+              "label": "Age",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                306.0,
+                672.9,
+                324.1,
+                678.1
+              ],
+              "valueBox": [
+                327.1,
+                670.9,
+                582.0,
+                681.1
+              ]
+            },
+            {
+              "label": "Phone Number",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                660.2,
+                100.2,
+                665.4
+              ],
+              "valueBox": [
+                103.2,
+                658.2,
+                302.0,
+                668.4
+              ]
+            },
+            {
+              "label": "City & State",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                306.0,
+                660.2,
+                356.2,
+                665.4
+              ],
+              "valueBox": [
+                359.2,
+                658.2,
+                582.0,
+                668.4
+              ]
+            },
+            {
+              "label": "Email Address",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                647.4,
+                95.6,
+                652.6
+              ],
+              "valueBox": [
+                98.6,
+                645.4,
+                302.0,
+                655.6
+              ]
+            },
+            {
+              "label": "Occupation",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                306.0,
+                647.4,
+                355.1,
+                652.6
+              ],
+              "valueBox": [
+                358.1,
+                645.4,
+                582.0,
+                655.6
+              ]
+            }
+          ]
+        },
+        {
+          "name": "LIENT INFORMATION",
+          "fields": [
+            {
+              "label": "Detail of Chief Complaint (Reason for Visit)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                38.3,
+                610.7,
+                218.2,
+                615.9
+              ],
+              "valueBox": [
+                221.2,
+                608.7,
+                498.2,
+                618.9
+              ]
+            },
+            {
+              "label": "Date of Injury or Onset of Symptoms",
+              "type": "date",
+              "value": null,
+              "labelBox": [
+                36.0,
+                585.6,
+                190.2,
+                590.8
+              ],
+              "valueBox": [
+                193.2,
+                583.6,
+                470.2,
+                593.8
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                36.0,
+                560.1,
+                190.2,
+                590.8
+              ]
+            },
+            {
+              "label": "Pertinent Lab/X-rays/Other Findings",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                572.8,
+                188.7,
+                578.1
+              ],
+              "valueBox": [
+                191.7,
+                570.8,
+                468.7,
+                581.1
+              ]
+            },
+            {
+              "label": "Other Relevant Information",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                560.1,
+                153.2,
+                565.3
+              ],
+              "valueBox": [
+                156.2,
+                558.1,
+                433.2,
+                568.3
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                418.2,
+                535.7,
+                428.2,
+                540.6
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                458.0,
+                535.7,
+                468.0,
+                540.6
+              ]
+            },
+            {
+              "label": "If Yes, Please Explain",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                523.7,
+                121.7,
+                528.9
+              ],
+              "valueBox": [
+                124.7,
+                521.7,
+                401.7,
+                531.9
+              ]
+            },
+            {
+              "label": "Have You Recently Been Diagnosed with Any Infectious Illness?",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                36.0,
+                499.6,
+                296.3,
+                504.9
+              ],
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    350.6,
+                    499.6,
+                    360.6,
+                    504.6
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    390.4,
+                    499.6,
+                    400.4,
+                    504.6
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": "If Yes, Please Explain",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                487.6,
+                121.7,
+                492.9
+              ],
+              "valueBox": [
+                124.7,
+                485.6,
+                401.7,
+                495.9
+              ]
+            }
+          ]
+        },
+        {
+          "name": "MEDICATION AND SUPPLEMENTS",
+          "fields": [
+            {
+              "label": "Overall General Health",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                45.8,
+                383.1,
+                142.6,
+                388.3
+              ],
+              "options": [
+                {
+                  "name": "Regular",
+                  "box": [
+                    70.1,
+                    368.9,
+                    80.1,
+                    373.9
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "YES",
+                  "box": [
+                    86.4,
+                    355.6,
+                    96.4,
+                    360.6
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    126.2,
+                    355.6,
+                    136.2,
+                    360.6
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Vegetarian",
+                  "box": [
+                    135.3,
+                    368.9,
+                    145.3,
+                    373.9
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Poor",
+                  "box": [
+                    224.2,
+                    383.1,
+                    234.2,
+                    388.1
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Good",
+                  "box": [
+                    280.1,
+                    383.1,
+                    290.1,
+                    388.1
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "Excellent",
+                  "box": [
+                    327.8,
+                    383.1,
+                    337.8,
+                    388.1
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                276.3,
+                368.9,
+                287.3,
+                374.4
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                210.5,
+                368.9,
+                220.5,
+                373.9
+              ]
+            },
+            {
+              "label": "Exercise",
+              "type": "text",
+              "value": "☐ YES ☐ NO",
+              "labelBox": [
+                45.8,
+                355.6,
+                81.8,
+                360.8
+              ],
+              "valueBox": [
+                84.8,
+                353.6,
+                192.5,
+                363.8
+              ]
+            },
+            {
+              "label": "If Yes Type/Frequency",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                196.5,
+                355.6,
+                287.7,
+                360.8
+              ],
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    287.2,
+                    329.3,
+                    297.2,
+                    334.3
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "YES",
+                  "box": [
+                    288.9,
+                    342.8,
+                    298.9,
+                    347.8
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    327.0,
+                    329.3,
+                    337.0,
+                    334.3
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    328.7,
+                    342.8,
+                    338.7,
+                    347.8
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": "Hypertension",
+              "type": "text",
+              "value": "☐ YES ☐ NO",
+              "labelBox": [
+                45.0,
+                342.8,
+                103.6,
+                348.0
+              ],
+              "valueBox": [
+                106.6,
+                340.8,
+                383.6,
+                351.0
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                45.0,
+                315.8,
+                356.1,
+                348.0
+              ]
+            },
+            {
+              "label": "Gastrointestinal (Abdominal Pain, Vomiting, Diarrhea)",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                45.0,
+                329.3,
+                271.4,
+                334.5
+              ],
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    287.6,
+                    315.8,
+                    297.6,
+                    320.8
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "YES",
+                  "box": [
+                    288.2,
+                    302.3,
+                    298.2,
+                    307.3
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": "Stress/Anxiety/Depression or Psychiatric Conditions",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                45.0,
+                315.8,
+                262.7,
+                321.0
+              ],
+              "options": [
+                {
+                  "name": "YES",
+                  "box": [
+                    288.5,
+                    288.8,
+                    298.5,
+                    293.8
+                  ],
+                  "selected": false
+                },
+                {
+                  "name": "NO",
+                  "box": [
+                    327.4,
+                    315.8,
+                    337.4,
+                    320.8
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                328.0,
+                302.3,
+                338.0,
+                307.3
+              ]
+            },
+            {
+              "label": null,
+              "type": "checkbox",
+              "value": "false",
+              "valueBox": [
+                371.5,
+                302.3,
+                381.5,
+                307.3
+              ]
+            },
+            {
+              "label": "Cancer",
+              "type": "checkbox-group",
+              "value": null,
+              "labelBox": [
+                47.3,
+                288.8,
+                78.3,
+                294.0
+              ],
+              "options": [
+                {
+                  "name": "NO",
+                  "box": [
+                    328.3,
+                    288.8,
+                    338.3,
+                    293.8
+                  ],
+                  "selected": false
+                }
+              ]
+            },
+            {
+              "label": "If Yes, Type/Location",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                69.9,
+                275.3,
+                155.7,
+                280.5
+              ],
+              "valueBox": [
+                158.7,
+                273.3,
+                435.7,
+                283.5
+              ]
+            },
+            {
+              "label": "If Yes to Any Question Above, Please Explain",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                45.0,
+                248.3,
+                231.1,
+                253.5
+              ],
+              "valueBox": [
+                234.1,
+                246.3,
+                511.1,
+                256.5
+              ]
+            },
+            {
+              "label": "Additional Notes (any relevant medical conditions)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                45.8,
+                222.4,
+                258.4,
+                227.6
+              ],
+              "valueBox": [
+                261.4,
+                220.4,
+                538.4,
+                230.6
+              ]
+            },
+            {
+              "label": "Disclaimer",
+              "type": "text",
+              "value": "I understand that Pranic Healing is not meant to replace conventional",
+              "labelBox": [
+                45.8,
+                199.3,
+                92.0,
+                204.6
+              ],
+              "valueBox": [
+                95.0,
+                197.3,
+                372.0,
+                207.6
+              ]
+            },
+            {
+              "label": null,
+              "type": "table",
+              "value": null,
+              "valueBox": [
+                45.8,
+                160.7,
+                545.2,
+                204.6
+              ]
+            },
+            {
+              "label": "Client Name (please print)",
+              "type": "text",
+              "value": null,
+              "labelBox": [
+                36.0,
+                125.7,
+                143.2,
+                130.9
+              ],
+              "valueBox": [
+                146.2,
+                123.7,
+                176.0,
+                133.9
+              ]
+            },
+            {
+              "label": "Client Signature __",
+              "type": "signature",
+              "value": null,
+              "labelBox": [
+                180.0,
+                125.7,
+                257.9,
+                130.9
+              ],
+              "valueBox": [
+                260.9,
+                123.7,
+                537.9,
+                133.9
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
